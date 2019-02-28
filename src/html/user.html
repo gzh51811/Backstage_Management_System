@@ -94,7 +94,7 @@
     </div>
     <script>
         //JavaScript代码区域
-        layui.use(['element', 'table'], function () {
+        layui.use(['table', 'element'], function () {
             var element = layui.element,
                 table = layui.table;
 
@@ -105,7 +105,6 @@
                 , height: 500
                 , toolbar: '#toolbarDemo'
                 , url: '/user' //数据接口
-                , page: true //开启分页
                 , cols: [[ //表头
                     { type: 'checkbox', fixed: 'left' },
                     { field: '_id', title: 'ID', width: 220, sort: true, fixed: 'left' }
@@ -116,6 +115,7 @@
                     , { field: 'beizhu', title: '备注', width: 200 }
                     , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 120 }
                 ]]
+                , page: true
             });
 
             //头工具栏事件
@@ -159,6 +159,8 @@
             });
 
         });
+
+
 
 
 

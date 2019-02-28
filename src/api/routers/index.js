@@ -9,6 +9,7 @@ var router = new Router();
 const goodlist = require('./goodlist');
 const loginRouter = require('./login');
 const userRouter = require('./user');
+const registerRouter = require('./register');
 
 router.use(koaBody({
     // 支持formdata
@@ -32,5 +33,7 @@ router.use(koaBody({
 router.use('/goodlist', goodlist.routes())
 router.use('/login', loginRouter.routes())
 router.use('/user', userRouter.routes())
+router.use('/register', registerRouter.routes())
+
 
 module.exports = router;

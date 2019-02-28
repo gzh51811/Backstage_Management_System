@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>添加用户</title>
     <link rel="stylesheet" href="../lib/layui/css/layui.css">
+    <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
     <script src="../lib/layui/layui.js"></script>
+    <script src="../js/common.js"></script>
 </head>
 
 <body class="layui-layout-body">
@@ -73,20 +75,22 @@
                 </span>
                 <!-- 添加用户 -->
 
-                <form class="layui-form layui-form-pane" action="" style="padding: 50px;">
+                <form class="layui-form layui-form-pane" action="" style="padding: 50px;" target="nm_iframe">
                     <div class="layui-form-item">
                         <label class="layui-form-label">用户名</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="username" lay-verify="required" placeholder="请输入用户名"
-                                autocomplete="off" class="layui-input">
+                            <input type="text" class="form-control" id="username" placeholder="请输入用户名"
+                                lay-verify="required">
+                            <div class="invalid-feedback"></div>
                         </div>
                     </div>
 
                     <div class="layui-form-item">
                         <label class="layui-form-label">密码</label>
                         <div class="layui-input-inline">
-                            <input type="password" id="password" placeholder="请输入密码" autocomplete="off"
-                                class="layui-input" lay-verify="required">
+                            <input type="password" id="password" placeholder="密码必须6到12位" autocomplete="off"
+                                class="form-control" lay-verify="pass">
+                            <div class="invalid-feedback"></div>
                         </div>
                     </div>
 
@@ -94,34 +98,45 @@
                         <label class="layui-form-label">确认密码</label>
                         <div class="layui-input-inline">
                             <input type="password" id="confirmpassword" placeholder="请再次输入密码" autocomplete="off"
-                                class="layui-input" lay-verify="required">
+                                class="form-control" lay-verify="pass">
+                            <div class="invalid-feedback"></div>
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">邮箱</label>
                         <div class="layui-input-inline">
-                            <input type="password" id="email" placeholder="请输入邮箱地址" autocomplete="off"
-                                class="layui-input" lay-verify="required">
+                            <input type="email" id="email" placeholder="请输入邮箱地址" autocomplete="off" class="form-control"
+                                lay-verify="required">
+                            <div class="invalid-feedback"></div>
                         </div>
                     </div>
 
-                    <div class="layui-form-item" pane="">
-                        <label class="layui-form-label">性别</label>
-                        <div class="layui-input-block">
-                            <input type="radio" name="sex" value="男" title="男" checked="">
-                            <input type="radio" name="sex" value="女" title="女">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">性别</label>
+                            <div class="layui-input-inline">
+                                <select name="modules" lay-search="" id="sex">
+                                    <option value="男">男</option>
+                                    <option value="女">女</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
+
+
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">备注</label>
                         <div class="layui-input-block" id="text">
-                            <textarea placeholder="请输入内容" class="layui-textarea" lay-verify="required"></textarea>
+                            <textarea placeholder="请输入内容" id="beizhu" class="layui-textarea"
+                                lay-verify="required"></textarea>
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <button class="layui-btn" lay-submit="" lay-filter="demo2" id="confirmBtn">添加用户</button>
+                        <!-- <button class="layui-btn" lay-filter="demo2" id="confirmBtn">添加用户</button> -->
+                        <button class="layui-btn" id="confirmBtn">添加用户</button>
                     </div>
                 </form>
+                <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
 
                 <!-- end -->
 
@@ -134,21 +149,13 @@
         </div>
     </div>
     <script>
-        layui.use(['form', 'layedit', 'laydate', 'element'], function () {
+        layui.use(['form', 'layedit', 'element'], function () {
             var element = layui.element;
 
             var form = layui.form
                 , layer = layui.layer
-                , layedit = layui.layedit
-                , laydate = layui.laydate;
+                , layedit = layui.layedit;
 
-            //日期
-            laydate.render({
-                elem: '#date'
-            });
-            laydate.render({
-                elem: '#date1'
-            });
 
             //创建一个编辑器
             var editIndex = layedit.build('LAY_demo_editor');
@@ -180,7 +187,142 @@
 
 
 
+            (() => {
+                //判断用户名是否存在
+                let usernameok = false;
+                let username = document.querySelector("#username");
+                username.onchange = () => {
+                    let _username = username.value;
+                    // 发起ajax请求
+                    let xhr = new XMLHttpRequest();
+                    if (_username.trim()) {
+                        xhr.onload = () => {
+                            if (xhr.status == 200) {
+                                if (xhr.responseText == 'no') {
+                                    username.classList.remove('is-valid')
+                                    username.classList.add('is-invalid')
+                                    username.nextElementSibling.innerText = '你输入的用户太受欢迎'
+                                    usernameok = false;
+                                } else {
+                                    username.classList.remove('is-invalid')
+                                    username.classList.add('is-valid')
+                                    username.nextElementSibling.innerText = '可以添加'
+                                    usernameok = true;
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        username.classList.remove('is-valid')
+                        username.classList.add('is-invalid')
+                        username.nextElementSibling.innerText = '不能为空'
+                        usernameok = false;
+                    }
+                    xhr.open('get', `/register?username=${_username}`, true);
+                    xhr.send();
+                }
+
+                //密码
+                let passwordok = false;
+                let password = document.querySelector("#password");
+                password.onchange = () => {
+                    let _password = password.value;
+                    if (_password.trim() && _password.length >= 6) {
+                        password.classList.remove('is-invalid')
+                        password.classList.add('is-valid')
+                        password.nextElementSibling.innerText = '符合'
+                        passwordok = true;
+                    } else {
+                        password.classList.remove('is-valid')
+                        password.classList.add('is-invalid')
+                        password.nextElementSibling.innerText = '密码不符合规则'
+                        passwordok = false;
+                    }
+                }
+
+                //确认密码
+                let confirmpasswordok = false;
+                let confirmpassword = document.querySelector("#confirmpassword");
+                confirmpassword.onchange = () => {
+                    let _confirmpassword = confirmpassword.value;
+                    let _password = password.value;
+                    if (_confirmpassword === _password) {
+                        confirmpassword.classList.remove('is-invalid')
+                        confirmpassword.classList.add('is-valid')
+                        confirmpassword.nextElementSibling.innerText = '符合'
+                        confirmpasswordok = true;
+                    } else {
+                        confirmpassword.classList.remove('is-valid')
+                        confirmpassword.classList.add('is-invalid')
+                        confirmpassword.nextElementSibling.innerText = '密码不一致'
+                        confirmpasswordok = false;
+                    }
+                }
+
+                //邮箱
+                let emailok = false;
+                let email = document.querySelector("#email");
+                email.onchange = () => {
+                    let _email = email.value;
+                    if (checkReg.email(_email)) {
+                        email.classList.remove('is-invalid')
+                        email.classList.add('is-valid')
+                        email.nextElementSibling.innerText = '符合'
+                        emailok = true;
+                    } else {
+                        email.classList.remove('is-valid')
+                        email.classList.add('is-invalid')
+                        email.nextElementSibling.innerText = '邮箱不符合规则'
+                        emailok = false;
+                    }
+                }
+
+                let sexval = document.getElementById("sex");
+                let confirmBtn = document.getElementById("confirmBtn");
+
+                let _gender = sexval.value;
+                //点击 
+                confirmBtn.onclick = function () {
+
+                    if (usernameok && passwordok && emailok) {
+
+
+                        let _gender = sexval.value;
+                        let _beizhu = document.getElementById("beizhu").value;
+                        let _username = username.value;
+                        let _password = password.value;
+                        let _email = email.value;
+
+                        // 发起ajax请求
+                        let xhr = new XMLHttpRequest();
+                        xhr.onload = () => {
+                            if (xhr.status == 200) {
+                                let res = JSON.parse(xhr.responseText);
+                                if (res.ok) {
+                                    layer.msg("添加成功！");
+                                    username.value = '';
+                                    password.value = '';
+                                    confirmpassword.value = '';
+                                    email.value = " ";
+                                    beizhu.value = " ";
+                                    usernameok = false;
+                                }
+                            }
+                        }
+                        xhr.open('post', '/register', true);
+                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                        let data = `username=${_username}&password=${_password}&email=${_email}&gender=${_gender}&beizhu=${_beizhu}`
+                        xhr.send(data)
+                    } else {
+                        layer.msg("添加失败！");
+                    }
+                }
+            })();
+
         });
+
+
     </script>
 </body>
 
