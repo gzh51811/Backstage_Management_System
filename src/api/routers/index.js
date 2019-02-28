@@ -8,6 +8,7 @@ var router = new Router();
 // 引入页面路由
 const goodlist = require('./goodlist');
 const loginRouter = require('./login');
+const userRouter = require('./user');
 
 router.use(koaBody({
     // 支持formdata
@@ -23,7 +24,6 @@ router.use(koaBody({
             // filename: 上传文件的原始名
             // file:文件信息对象
             //   * path:
-
             // file.path = './uploads/'+filename
         }
     }
@@ -31,5 +31,6 @@ router.use(koaBody({
 
 router.use('/goodlist', goodlist.routes())
 router.use('/login', loginRouter.routes())
+router.use('/user', userRouter.routes())
 
 module.exports = router;
