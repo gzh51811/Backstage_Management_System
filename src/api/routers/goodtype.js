@@ -4,12 +4,13 @@ const db = require('../db');
 
 var ObjectId = require('mongodb').ObjectId;
 
+
 // 创建路由
 var router = new Router();
 
 router.get('/', async (ctx, next) => {
 
-    let data = await db.find('goodlist', {});
+    let data = await db.find('goodtype', {});
     // console.log(ctx.query,username,res)
     let res = {
         code: 0,
@@ -23,7 +24,7 @@ router.post('/', async (ctx, next) => {
     let { _id } = ctx.request.body;
     // console.log('ObjectId(' + _id + ')');
 
-    let res = await db.delete('goodlist', { _id: ObjectId(_id) });
+    let res = await db.delete('goodtype', { _id: ObjectId(_id) });
 
     ctx.body = res;
     // 存入数据库

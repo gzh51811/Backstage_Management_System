@@ -9,7 +9,7 @@ var router = new Router();
 
 router.get('/', async (ctx, next) => {
 
-    let data = await db.find('goodlist', {});
+    let data = await db.find('orderlist', {});
     // console.log(ctx.query,username,res)
     let res = {
         code: 0,
@@ -23,10 +23,11 @@ router.post('/', async (ctx, next) => {
     let { _id } = ctx.request.body;
     // console.log('ObjectId(' + _id + ')');
 
-    let res = await db.delete('goodlist', { _id: ObjectId(_id) });
+    let res = await db.delete('orderlist', { _id: ObjectId(_id) });
 
     ctx.body = res;
     // 存入数据库
 
 })
+
 module.exports = router;

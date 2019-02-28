@@ -39,8 +39,8 @@
                     <li class="layui-nav-item layui-nav-itemed">
                         <a class="" href="javascript:;">商品管理</a>
                         <dl class="layui-nav-child">
-                            <dd class="layui-this"><a href="javascript:;">商品列表</a></dd>
-                            <dd><a href="goodtype.html">商品分类</a></dd>
+                            <dd><a href="goodlist.html">商品列表</a></dd>
+                            <dd class="layui-this"><a href="goodtype.html">商品分类</a></dd>
                             <dd><a href="addgoods.html">添加商品</a></dd>
                         </dl>
                     </li>
@@ -73,7 +73,6 @@
                 <table id="demo" lay-filter="test">
                 </table>
                 <script type="text/html" id="barDemo">
-                    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
                     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
                     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
                   </script>
@@ -95,27 +94,20 @@
             table.render({
                 elem: '#demo'
                 , height: 440
-                , url: '/goodlist' //数据接口
+                , url: '/goodtype' //数据接口
                 , page: true //开启分页
                 , cols: [[ //表头
                     { type: 'checkbox', fixed: 'left' },
-                    { field: '_id', title: 'ID', width: 80, sort: true, fixed: 'left' }
-                    , { field: 'goodname', title: '商品名称', width: 150 }
-                    , { field: 'type', title: '分类', width: 80 }
-                    , { field: 'oldprice', title: '价格（原价）', width: 120, sort: true }
-                    , { field: 'newprice', title: '价格（现价）', width: 120, sort: true }
-                    , { field: 'kucun', title: '库存', width: 80, sort: true }
-                    , { field: 'zhuangtai', title: '状态', width: 80, sort: true }
-                    , { field: 'shijian', title: '添加时间', width: 150 }
-                    , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 180 }
+                    { field: '_id', title: 'ID', width: 220, sort: true, fixed: 'left' }
+                    , { field: 'type', title: '商品分类', width: 580 }
+                    , { field: 'time', title: '时间', width: 150 }
+                    , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 120 }
                 ]]
             });
             table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
                 var data = obj.data //获得当前行数据
                     , layEvent = obj.event; //获得 lay-event 对应的值
-                if (layEvent === 'detail') {
-                    layer.msg('查看操作');
-                } else if (layEvent === 'del') {
+                if (layEvent === 'del') {
                     layer.confirm('真的删除行么', function (index) {
                         obj.del(); //删除对应行（tr）的DOM结构
                         layer.close(index);
@@ -126,7 +118,7 @@
                                 let res = JSON.parse(xhr.responseText);
                             }
                         }
-                        xhr.open('post', '/goodlist', true);
+                        xhr.open('post', '/goodtype', true);
                         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                         let datas = `_id=${data._id}`;
                         xhr.send(datas);
@@ -134,10 +126,10 @@
                 } else if (layEvent === 'edit') {
                     layer.prompt({
                         formType: 2
-                        , value: data.zhuangtai
+                        , value: data.type
                     }, function (value, index) {
                         obj.update({
-                            zhuangtai: value
+                            type: value
                         });
                         layer.close(index);
                     });

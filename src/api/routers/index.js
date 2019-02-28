@@ -7,9 +7,14 @@ var router = new Router();
 
 // 引入页面路由
 const goodlist = require('./goodlist');
+const orderlist = require('./orderlist');
 const loginRouter = require('./login');
 const userRouter = require('./user');
+<<<<<<< HEAD
 const registerRouter = require('./register');
+=======
+const goodtype = require('./goodtype');
+>>>>>>> cea1409ec6cee2ac06d33ca182a411db7e06dd7b
 
 router.use(koaBody({
     // 支持formdata
@@ -33,7 +38,12 @@ router.use(koaBody({
 router.use('/goodlist', goodlist.routes())
 router.use('/login', loginRouter.routes())
 router.use('/user', userRouter.routes())
+<<<<<<< HEAD
 router.use('/register', registerRouter.routes())
 
 
+=======
+router.use('/orderlist', orderlist.routes())
+router.use('/goodtype', goodtype.routes())
+>>>>>>> cea1409ec6cee2ac06d33ca182a411db7e06dd7b
 module.exports = router;
