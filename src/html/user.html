@@ -41,7 +41,7 @@
                         <dl class="layui-nav-child">
                             <dd><a href="goodlist.html">商品列表</a></dd>
                             <dd><a href="javascript:;">商品分类</a></dd>
-                            <dd><a href="javascript:;">添加商品</a></dd>
+                            <dd><a href="addgoods.html">添加商品</a></dd>
                         </dl>
                     </li>
                     <li class="layui-nav-item layui-nav-itemed">
@@ -70,8 +70,8 @@
                     <a href="javascript:;">用户管理</a>
                     <a><cite>用户列表</cite></a>
                 </span>
-                <table id="demo" lay-filter="test">
-                </table>
+
+                <table id="test" lay-filter="test"></table>
 
                 <script type="text/html" id="toolbarDemo">
                 <div class="layui-btn-container">
@@ -100,19 +100,21 @@
 
             //第一个实例
             table.render({
-                elem: '#demo'
-                , height: 312
+                elem: '#test'
+                , width: 1166
+                , height: 500
+                , toolbar: '#toolbarDemo'
                 , url: '/user' //数据接口
                 , page: true //开启分页
                 , cols: [[ //表头
                     { type: 'checkbox', fixed: 'left' },
                     { field: '_id', title: 'ID', width: 220, sort: true, fixed: 'left' }
-                    , { field: 'username', title: '用户名', width: 150 }
-                    , { field: 'password', title: '密码', width: 170 }
+                    , { field: 'username', title: '用户名', width: 100 }
+                    , { field: 'password', title: '密码', width: 150 }
                     , { field: 'email', title: '邮箱', width: 220 }
                     , { field: 'gender', title: '性别', width: 100, sort: true }
                     , { field: 'beizhu', title: '备注', width: 200 }
-                    , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 180 }
+                    , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 120 }
                 ]]
             });
 

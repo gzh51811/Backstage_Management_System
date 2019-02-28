@@ -42,7 +42,7 @@
                         <dl class="layui-nav-child">
                             <dd><a href="goodlist.html">商品列表</a></dd>
                             <dd><a href="javascript:;">商品分类</a></dd>
-                            <dd><a href="javascript:;">添加商品</a></dd>
+                            <dd><a href="addgoods.html">添加商品</a></dd>
                         </dl>
                     </li>
                     <li class="layui-nav-item layui-nav-itemed">
@@ -73,7 +73,7 @@
                 </span>
                 <!-- 添加用户 -->
 
-                <form class="layui-form layui-form-pane" action="" style="padding: 50px ;">
+                <form class="layui-form layui-form-pane" action="" style="padding: 50px;">
                     <div class="layui-form-item">
                         <label class="layui-form-label">用户名</label>
                         <div class="layui-input-inline">
@@ -82,13 +82,11 @@
                         </div>
                     </div>
 
-
-
                     <div class="layui-form-item">
                         <label class="layui-form-label">密码</label>
                         <div class="layui-input-inline">
                             <input type="password" id="password" placeholder="请输入密码" autocomplete="off"
-                                class="layui-input">
+                                class="layui-input" lay-verify="required">
                         </div>
                     </div>
 
@@ -96,18 +94,16 @@
                         <label class="layui-form-label">确认密码</label>
                         <div class="layui-input-inline">
                             <input type="password" id="confirmpassword" placeholder="请再次输入密码" autocomplete="off"
-                                class="layui-input">
+                                class="layui-input" lay-verify="required">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">邮箱</label>
                         <div class="layui-input-inline">
                             <input type="password" id="email" placeholder="请输入邮箱地址" autocomplete="off"
-                                class="layui-input">
+                                class="layui-input" lay-verify="required">
                         </div>
                     </div>
-
-
 
                     <div class="layui-form-item" pane="">
                         <label class="layui-form-label">性别</label>
@@ -119,7 +115,7 @@
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">备注</label>
                         <div class="layui-input-block" id="text">
-                            <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                            <textarea placeholder="请输入内容" class="layui-textarea" lay-verify="required"></textarea>
                         </div>
                     </div>
                     <div class="layui-form-item">
@@ -128,9 +124,6 @@
                 </form>
 
                 <!-- end -->
-
-
-
 
             </div>
         </div>

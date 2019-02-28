@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Backstage Management System</title>
+    <link rel="stylesheet" href="../lib/layui/css/layui.css">
+    <script src="../lib/layui/layui.js"></script>
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo">Management System</div>
+            <!-- 头部区域（可配合layui已有的水平导航） -->
+            <ul class="layui-nav layui-layout-left">
+                <li class="layui-nav-item"><a href="">商品管理</a></li>
+            </ul>
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">
+                        <img src="../images/xxx.jpg" class="layui-nav-img">
+                        Administartor
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="">基本资料</a></dd>
+                        <dd><a href="">安全设置</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="">退出</a></li>
+            </ul>
+        </div>
+
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                    <li class="layui-nav-item layui-nav-itemed">
+                        <a class="" href="javascript:;">商品管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="goodlist.html">商品列表</a></dd>
+                            <dd><a href="javascript:;">商品分类</a></dd>
+                            <dd class="layui-this"><a href="addgoods.html">添加商品</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item layui-nav-itemed">
+                        <a href="javascript:;">用户管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="user.html">用户列表</a></dd>
+                            <dd><a href="adduser.html">用户添加</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item layui-nav-itemed">
+                        <a href="javascript:;">订单管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;">订单列表</a></dd>
+
+                        </dl>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            <div style="padding: 20px;">
+                <span class="layui-breadcrumb">
+                    <a href="../index.html">首页</a>
+                    <a href="javascript:;">商品管理</a>
+                    <a><cite>商品添加</cite></a>
+                </span>
+
+                <form class="layui-form layui-form-pane" action="" style="padding: 50px; width: 800px;">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">商品名称</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" id="goodname" autocomplete="off" placeholder="请输入标题"
+                                class="layui-input" lay-verify="required">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">商品副标题</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" id="goodtitle" autocomplete="off" placeholder="请输入副标题"
+                                class="layui-input" lay-verify="required">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">商品价格</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="title" id="goodprice" autocomplete="off" placeholder="商品价格"
+                                class="layui-input" lay-verify="required">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">商品分类</label>
+                            <div class="layui-input-inline">
+                                <select name="modules" lay-search="" lay-verify="required">
+                                    <option value="">直接选择或搜索选择</option>
+                                    <option value="1">手机</option>
+                                    <option value="2">平板</option>
+                                    <option value="3">电脑</option>
+                                    <option value="4">配件</option>
+                                    <option value="5">办公</option>
+                                    <option value="6">其他</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">图片上传</label>
+                            <div class="layui-upload-drag" id="test10">
+                                <i class="layui-icon"></i>
+                                <p>点击上传，或将文件拖拽到此处</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">库存</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="title" id="kucun" autocomplete="off" placeholder="库存"
+                                class="layui-input" lay-verify="required">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">商品属性</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" name="like[remai]" title="热卖">
+                            <input type="checkbox" name="like[cuxiao]" title="促销" checked="">
+                            <input type="checkbox" name="like[tuijian]" title="推荐">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">上架</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest"
+                                lay-text="ON|OFF">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">商品描述</label>
+                        <div class="layui-input-block">
+                            <textarea placeholder="请输入内容" class="layui-textarea" name="desc"
+                                lay-verify="required"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+        <div class="layui-footer" style="text-align:center">
+            <!-- 底部固定区域 -->
+            © 2019.2.27 Backstage Management System
+        </div>
+    </div>
+    <script>
+        //JavaScript代码区域
+        layui.use(['element', 'form', 'upload'], function () {
+            var element = layui.element
+                , form = layui.form
+                , $ = layui.jquery
+                , upload = layui.upload;
+
+            form.render();
+
+            //拖拽上传
+            upload.render({
+                elem: '#test10'
+                , url: '../images'
+                , done: function (res) {
+                    console.log(res)
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
