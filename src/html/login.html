@@ -18,13 +18,13 @@
         <div id="hlogo"><img src="../images/hlogo.jpg" alt=""></div>
         <p id="hh1">后台管理系统</p>
         <div class="form-group htx1">
-            <input type="text" class="form-control" id="" placeholder="用户名">
+            <input type="text" class="form-control" id="username" placeholder="用户名">
         </div>
         <div class="form-group htx2">
-            <input type="password" class="form-control" id="" placeholder="密码">
+            <input type="password" class="form-control" id="password" placeholder="密码">
         </div>
         <div class="form-group htx3">
-            <input type="password" class="form-control" id="" placeholder="图形验证码">
+            <input type="text" class="form-control" id="yzm" placeholder="图形验证码">
         </div>
         <span id="random"></span>
         <div class="checkbox">
@@ -34,7 +34,7 @@
             </label>
             <span id="hwj">忘记密码?</span>
         </div>
-        <div id="hlbtn">登录</div>
+        <div id="hlbtn" class="btn btn-success btnLogin">登录</div>
     </section>
     <script>
         $(function () {
@@ -44,7 +44,58 @@
                 $('#random').css('background', randomColor(16));
                 $('#random').html(randomCode());
             })
-        })
+        });
+
+        (() => {
+
+            let username = document.querySelector('#username');
+            let password = document.querySelector('#password');
+            // let mdl = document.querySelector('#mdl');
+            let btnLogin = document.querySelector('.btnLogin');
+            let yzm = document.querySelector('#yzm');
+            let random = document.querySelector('#random');
+
+            btnLogin.onclick = (e) => {
+                let _username = username.value.trim();
+                let _password = password.value.trim();
+                let _yzm = yzm.value.toLowerCase();
+                let _random = random.innerHTML.toLowerCase();
+                // console.log(_yzm, _random);
+                // let _mdl = mdl.checked;
+                if (_yzm == _random) {
+                    if (_username && _password) {
+                        let xhr = new XMLHttpRequest();
+                        xhr.onload = () => {
+
+                            if (xhr.status == 200) {
+                                let res = JSON.parse(xhr.responseText);
+                                // console.log(res);
+                                if (res) {
+                                    location.href = '../index.html';
+                                }
+                                else {
+                                    alert('用户名或密码错误');
+                                }
+                            }
+                        }
+                        xhr.open('post', '/login', true);
+                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                        let data = `username=${_username}&password=${_password}`
+                        xhr.send(data);
+
+                        e.preventDefault();
+                    }
+                    else {
+                        alert('用户名或密码不能为空');
+                    }
+                }
+                else {
+                    alert('验证码不正确')
+                }
+                // 发起ajax请求
+
+            }
+        })();
     </script>
 </body>
 

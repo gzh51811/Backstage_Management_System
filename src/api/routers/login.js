@@ -1,6 +1,6 @@
 const Router = require('koa-router');
 
-const db = require('../db');
+const db = require('./../db');
 
 // 创建路由
 var router = new Router();
@@ -9,29 +9,22 @@ var router = new Router();
 /**
  * ctx
  */
-router.post('/',async (ctx,next)=>{
+router.post('/', async (ctx, next) => {
     // 解构
-    let {username,password,mdl} = ctx.request.body;
+    let { username, password } = ctx.request.body;
+    // console.log({ username, password });
 
-    let res = await db.find('user',{username,password});
+    let res = await db.find('user', { username, password });
 
     res = res[0];
-
-    if(res){
-        ctx.body = {
-            _id:res._id,
-            username:res.username,
-            gender:res.gender,
-            regtime:res.regtime
-        }
-    }else{
-        ctx.body = {
-            code:100,
-            msg:'fail'
-        }
+    // console.log(res);
+    if (res) {
+        ctx.body = 1;
+    } else {
+        ctx.body = 0;
     }
 
-    
+
 
     // 存入数据库
 
