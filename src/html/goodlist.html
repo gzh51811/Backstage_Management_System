@@ -120,6 +120,16 @@
                         obj.del(); //删除对应行（tr）的DOM结构
                         layer.close(index);
                         //向服务端发送删除指令
+                        let xhr = new XMLHttpRequest();
+                        xhr.onload = () => {
+                            if (xhr.status == 200) {
+                                let res = JSON.parse(xhr.responseText);
+                            }
+                        }
+                        xhr.open('post', '/goodlist', true);
+                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                        let datas = `_id=${data._id}`;
+                        xhr.send(datas);
                     });
                 } else if (layEvent === 'edit') {
                     layer.prompt({
