@@ -10,6 +10,7 @@ const goodlist = require('./goodlist');
 const orderlist = require('./orderlist');
 const loginRouter = require('./login');
 const userRouter = require('./user');
+const goodtype = require('./goodtype');
 
 router.use(koaBody({
     // 支持formdata
@@ -34,4 +35,5 @@ router.use('/goodlist', goodlist.routes())
 router.use('/login', loginRouter.routes())
 router.use('/user', userRouter.routes())
 router.use('/orderlist', orderlist.routes())
+router.use('/goodtype', goodtype.routes())
 module.exports = router;
