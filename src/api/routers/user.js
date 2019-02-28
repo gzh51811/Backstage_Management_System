@@ -18,7 +18,7 @@ router.get('/', async (ctx, next) => {
     ctx.body = res;
 })
 
-<<<<<<< HEAD
+
 
 // 判断用户名是否存在
 router.get('/', async (ctx, next) => {
@@ -35,7 +35,7 @@ router.get('/', async (ctx, next) => {
 
 
 
-=======
+
 router.post('/', async (ctx, next) => {
     // 解构
     let { _id } = ctx.request.body;
@@ -47,5 +47,5 @@ router.post('/', async (ctx, next) => {
     // 存入数据库
 
 })
->>>>>>> cea1409ec6cee2ac06d33ca182a411db7e06dd7b
+
 module.exports = router;
