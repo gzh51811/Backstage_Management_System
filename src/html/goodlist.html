@@ -72,37 +72,11 @@
                 </span>
                 <table id="demo" lay-filter="test">
                 </table>
-                <script>
-                    layui.use('table', function () {
-                        var table = layui.table;
-
-                        //第一个实例
-                        table.render({
-                            elem: '#demo'
-                            , height: 312
-                            , url: '/goodlist' //数据接口
-                            , page: true //开启分页
-                            , cols: [[ //表头
-                                { type: 'checkbox', fixed: 'left' },
-                                { field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left' }
-                                , { field: 'goodlist', title: '商品名称', width: 150 }
-                                , { field: 'type', title: '分类', width: 80, sort: true }
-                                , { field: 'oldprice', title: '价格（原价）', width: 120 }
-                                , { field: 'newprice', title: '价格（现价）', width: 120 }
-                                , { field: 'kucun', title: '库存', width: 80, sort: true }
-                                , { field: 'zhuangtai', title: '状态', width: 80, sort: true }
-                                , { field: 'shijian', title: '添加时间', width: 180 }
-                                , { title: '操作', width: 180, sort: true }
-                            ]]
-                        });
-
-                    });
-                </script>
-                <!-- <script type="text/html" id="barDemo">
+                <script type="text/html" id="barDemo">
                     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
                     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
                     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-                  </script> -->
+                  </script>
             </div>
         </div>
 
@@ -115,6 +89,30 @@
         //JavaScript代码区域
         layui.use('element', function () {
             var element = layui.element;
+
+        });
+        layui.use('table', function () {
+            var table = layui.table;
+
+            //第一个实例
+            table.render({
+                elem: '#demo'
+                , height: 312
+                , url: '/goodlist' //数据接口
+                , page: true //开启分页
+                , cols: [[ //表头
+                    { type: 'checkbox', fixed: 'left' },
+                    { field: '_id', title: 'ID', width: 80, sort: true, fixed: 'left' }
+                    , { field: 'goodname', title: '商品名称', width: 150 }
+                    , { field: 'type', title: '分类', width: 80 }
+                    , { field: 'oldprice', title: '价格（原价）', width: 120, sort: true }
+                    , { field: 'newprice', title: '价格（现价）', width: 120, sort: true }
+                    , { field: 'kucun', title: '库存', width: 80, sort: true }
+                    , { field: 'zhuangtai', title: '状态', width: 80, sort: true }
+                    , { field: 'shijian', title: '添加时间', width: 180 }
+                    , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 180 }
+                ]]
+            });
 
         });
     </script>
