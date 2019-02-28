@@ -7,6 +7,7 @@ var router = new Router();
 
 // 引入页面路由
 const goodlist = require('./goodlist');
+const orderlist = require('./orderlist');
 const loginRouter = require('./login');
 const userRouter = require('./user');
 
@@ -32,5 +33,5 @@ router.use(koaBody({
 router.use('/goodlist', goodlist.routes())
 router.use('/login', loginRouter.routes())
 router.use('/user', userRouter.routes())
-
+router.use('/orderlist', orderlist.routes())
 module.exports = router;
