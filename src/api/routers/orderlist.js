@@ -2,6 +2,8 @@ const Router = require('koa-router');
 
 const db = require('../db');
 
+var ObjectId = require('mongodb').ObjectId;
+
 // 创建路由
 var router = new Router();
 
@@ -14,6 +16,18 @@ router.get('/', async (ctx, next) => {
         data: data
     }
     ctx.body = res;
+})
+
+router.post('/', async (ctx, next) => {
+    // 解构
+    let { _id } = ctx.request.body;
+    // console.log('ObjectId(' + _id + ')');
+
+    let res = await db.delete('orderlist', { _id: ObjectId(_id) });
+
+    ctx.body = res;
+    // 存入数据库
+
 })
 
 module.exports = router;
