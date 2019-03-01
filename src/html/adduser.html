@@ -318,83 +318,72 @@
                 let _gender = sexval.value;
                 //点击 
                 //判断是修改还是新注册，now是证明有id是修改
-                // if (now) {
-                //     confirmBtn.onclick = function () {
-
-                //         if (usernameok && passwordok && emailok) {
-
-
-                //             let _gender = sexval.value;
-                //             let _beizhu = document.getElementById("beizhu").value;
-                //             let _username = username.value;
-                //             let _password = password.value;
-                //             let _email = email.value;
-
-                //             // 发起ajax请求
-                //             let xhr = new XMLHttpRequest();
-                //             xhr.onload = () => {
-                //                 if (xhr.status == 200) {
-                //                     let res = JSON.parse(xhr.responseText);
-                //                     if (res.ok) {
-                //                         layer.msg("修改成功！");
-                //                         username.value = '';
-                //                         password.value = '';
-                //                         confirmpassword.value = '';
-                //                         email.value = " ";
-                //                         beizhu.value = " ";
-                //                         usernameok = false;
-                //                     }
-                //                 }
-                //             }
-                //             xhr.open('post', '/register', true);
-                //             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-                //             let data = `username=${_username}&password=${_password}&email=${_email}&gender=${_gender}&beizhu=${_beizhu}`
-                //             xhr.send(data)
-                //         } else {
-                //             layer.msg("修改失败！");
-                //         }
-                //     }
-
-                // }
-                // else {
-                confirmBtn.onclick = function () {
-
-                    if (usernameok && passwordok && emailok) {
-
-
-                        let _gender = sexval.value;
-                        let _beizhu = document.getElementById("beizhu").value;
-                        let _username = username.value;
-                        let _password = password.value;
-                        let _email = email.value;
-
-                        // 发起ajax请求
-                        let xhr = new XMLHttpRequest();
-                        xhr.onload = () => {
-                            if (xhr.status == 200) {
-                                let res = JSON.parse(xhr.responseText);
-                                if (res.ok) {
-                                    layer.msg("添加成功！");
-                                    username.value = '';
-                                    password.value = '';
-                                    confirmpassword.value = '';
-                                    email.value = " ";
-                                    beizhu.value = " ";
-                                    usernameok = false;
+                if (now) {
+                    usernameok = true;
+                    passwordok = true;
+                    emailok = true;
+                    confirmBtn.onclick = function () {
+                        if (usernameok && passwordok && emailok) {
+                            let _gender = sexval.value;
+                            let _beizhu = document.getElementById("beizhu").value;
+                            let _username = username.value;
+                            let _password = password.value;
+                            let _email = email.value;
+                            // 发起ajax请求
+                            let xhr = new XMLHttpRequest();
+                            xhr.onload = () => {
+                                if (xhr.status == 200) {
+                                    let res = JSON.parse(xhr.responseText);
+                                    if (res.ok) {
+                                        layer.msg("修改成功！");
+                                        setTimeout("window.location.href = './user.html'", 3000);
+                                    }
                                 }
                             }
-                        }
-                        xhr.open('post', '/register', true);
-                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                            xhr.open('post', '/adduser2', true);
+                            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-                        let data = `username=${_username}&password=${_password}&email=${_email}&gender=${_gender}&beizhu=${_beizhu}`
-                        xhr.send(data)
-                    } else {
-                        layer.msg("添加失败！");
+                            let data = `_id=${now}&username=${_username}&password=${_password}&email=${_email}&gender=${_gender}&beizhu=${_beizhu}`
+                            xhr.send(data)
+                        } else {
+                            layer.msg("修改失败！");
+                        }
+                    }
+
+                }
+                else {
+                    confirmBtn.onclick = function () {
+
+                        if (usernameok && passwordok && emailok) {
+
+
+                            let _gender = sexval.value;
+                            let _beizhu = document.getElementById("beizhu").value;
+                            let _username = username.value;
+                            let _password = password.value;
+                            let _email = email.value;
+
+                            // 发起ajax请求
+                            let xhr = new XMLHttpRequest();
+                            xhr.onload = () => {
+                                if (xhr.status == 200) {
+                                    let res = JSON.parse(xhr.responseText);
+                                    if (res.ok) {
+                                        layer.msg("添加成功！");
+                                        setTimeout("window.location.href = './user.html'", 3000);
+                                    }
+                                }
+                            }
+                            xhr.open('post', '/register', true);
+                            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                            let data = `username=${_username}&password=${_password}&email=${_email}&gender=${_gender}&beizhu=${_beizhu}`
+                            xhr.send(data)
+                        } else {
+                            layer.msg("添加失败！");
+                        }
                     }
                 }
-                // }
 
             })();
 
