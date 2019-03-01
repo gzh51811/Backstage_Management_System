@@ -14,6 +14,8 @@ const registerRouter = require('./register');
 const goodtype = require('./goodtype');
 const addgoods = require('./addgoods');
 const addgoods2 = require('./addgoods2');
+const addgoods3 = require('./addgoods3');
+const adduser = require('./adduser');
 
 
 
@@ -45,4 +47,6 @@ router.use('/goodtype', goodtype.routes())
 
 router.use('/addgoods', addgoods.routes())
 router.use('/addgoods2', addgoods2.routes())
+router.use('/addgoods3', addgoods3.routes())
+router.use('/adduser', adduser.routes())
 module.exports = router;

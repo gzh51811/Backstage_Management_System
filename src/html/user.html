@@ -156,31 +156,13 @@
                         xhr.send(datas);
                     });
                 } else if (obj.event === 'edit') {
-                    layer.prompt({
-                        formType: 2
-                        , value: data.username
-                        // , value: data.email
-                        // , value: data.gender
-                        // , value: data.beizhu
-                    }, function (value, index) {
-                        obj.update({
-                            username: "修改"
-                            , password: 'wusiyu'
-                        });
-                        layer.close(index);
-                    });
-
-
-
+                    var res = data._id;
+                    // console.log(res);
+                    location.href = 'adduser.html?' + res;
                 }
             });
 
         });
-
-
-
-
-
     </script>
 </body>
 

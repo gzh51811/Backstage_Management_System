@@ -224,36 +224,79 @@
         let kucun = document.getElementById("kucun");
         let htype = document.getElementById("htype");
         let zhuangtai = document.getElementById("zhuangtai");
-        htj.onclick = function () {
-            // console.log($('#htype').val());
-            let _goodname = goodname.value;
-            let _newprice = newprice.value;
-            let _oldprice = oldprice.value;
-            let _kucun = kucun.value;
-            let _htype = htype.value;
-            let _zhuangtai = zhuangtai.value;
-            // console.log(_htype);
-            if (_goodname && _newprice && _oldprice && _kucun && _htype && _zhuangtai) {
-                let xhr = new XMLHttpRequest();
-                xhr.onload = () => {
-                    if (xhr.status == 200) {
-                        let res = JSON.parse(xhr.responseText);
-                        if (res) {
-                            layer.msg("添加成功！");
-                            window.location.href = './goodlist.html';
+
+
+        // 编辑修改分支
+        if (now) {
+            htj.onclick = function () {
+                // console.log($('#htype').val());
+                let _goodname = goodname.value;
+                let _newprice = newprice.value;
+                let _oldprice = oldprice.value;
+                let _kucun = kucun.value;
+                let _htype = htype.value;
+                let _zhuangtai = zhuangtai.value;
+                // console.log(_htype);
+                if (_goodname && _newprice && _oldprice && _kucun && _htype && _zhuangtai) {
+                    let xhr = new XMLHttpRequest();
+                    xhr.onload = () => {
+                        if (xhr.status == 200) {
+                            let res = JSON.parse(xhr.responseText);
+                            // console.log(str);
+                            if (res) {
+                                layer.msg("修改成功！");
+                                // window.location.href = './goodlist.html';
+                                setTimeout("window.location.href = './goodlist.html'", 3000);
+                            }
                         }
                     }
-                }
-                xhr.open('post', '/addgoods2', true);
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    xhr.open('post', '/addgoods3', true);
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-                let data = `goodname=${_goodname}&newprice=${_newprice}&oldprice=${_oldprice}&kucun=${_kucun}&type=${_htype}&zhuangtai=${_zhuangtai}`
-                xhr.send(data)
-            }
-            else {
-                layer.msg("请填写完整！");
+                    let data = `_id=${now}&goodname=${_goodname}&newprice=${_newprice}&oldprice=${_oldprice}&kucun=${_kucun}&type=${_htype}&zhuangtai=${_zhuangtai}`
+                    xhr.send(data)
+                }
+                else {
+                    layer.msg("请填写完整！");
+                }
             }
         }
+        //添加商品
+        else {
+            htj.onclick = function () {
+                // console.log($('#htype').val());
+                let _goodname = goodname.value;
+                let _newprice = newprice.value;
+                let _oldprice = oldprice.value;
+                let _kucun = kucun.value;
+                let _htype = htype.value;
+                let _zhuangtai = zhuangtai.value;
+                // console.log(_htype);
+                if (_goodname && _newprice && _oldprice && _kucun && _htype && _zhuangtai) {
+                    let xhr = new XMLHttpRequest();
+                    xhr.onload = () => {
+                        if (xhr.status == 200) {
+                            let res = JSON.parse(xhr.responseText);
+                            if (res) {
+                                layer.msg("添加成功！");
+                                // window.location.href = './goodlist.html';
+                                //延时跳转页面
+                                setTimeout("window.location.href = './goodlist.html'", 3000);
+                            }
+                        }
+                    }
+                    xhr.open('post', '/addgoods2', true);
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                    let data = `goodname=${_goodname}&newprice=${_newprice}&oldprice=${_oldprice}&kucun=${_kucun}&type=${_htype}&zhuangtai=${_zhuangtai}`
+                    xhr.send(data)
+                }
+                else {
+                    layer.msg("请填写完整！");
+                }
+            }
+        }
+
 
 
 

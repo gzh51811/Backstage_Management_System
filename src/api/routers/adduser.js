@@ -12,10 +12,11 @@ router.post('/', async (ctx, next) => {
     let { _id } = ctx.request.body;
     // console.log({ _id });
 
-    let res = await db.find('goodlist', { _id: ObjectId(_id) });
+    let res = await db.find('user', { _id: ObjectId(_id) });
     // console.log(res);
     ctx.body = res;
     // 存入数据库
+
 })
 
 
