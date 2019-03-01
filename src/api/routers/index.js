@@ -10,10 +10,11 @@ const goodlist = require('./goodlist');
 const orderlist = require('./orderlist');
 const loginRouter = require('./login');
 const userRouter = require('./user');
-
 const registerRouter = require('./register');
-
 const goodtype = require('./goodtype');
+const addgoods = require('./addgoods');
+const addgoods2 = require('./addgoods2');
+
 
 
 router.use(koaBody({
@@ -38,12 +39,10 @@ router.use(koaBody({
 router.use('/goodlist', goodlist.routes())
 router.use('/login', loginRouter.routes())
 router.use('/user', userRouter.routes())
-
 router.use('/register', registerRouter.routes())
-
-
-
 router.use('/orderlist', orderlist.routes())
 router.use('/goodtype', goodtype.routes())
 
+router.use('/addgoods', addgoods.routes())
+router.use('/addgoods2', addgoods2.routes())
 module.exports = router;
