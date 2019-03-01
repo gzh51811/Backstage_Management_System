@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>用户列表</title>
+
     <link rel="stylesheet" href="../lib/layui/css/layui.css">
     <script src="../lib/layui/layui.js"></script>
 </head>
@@ -71,7 +72,19 @@
                     <a><cite>用户列表</cite></a>
                 </span>
 
+                <blockquote class="layui-elem-quote news_search">
+                    <div class="layui-inline">
+                        <div class="layui-input-inline">
+                            <input type="text" value="" placeholder="请输入关键字" class="layui-input search_input"
+                                id="username">
+                        </div>
+                        <a class="layui-btn search_btn">查询</a>
+                    </div>
+
+                </blockquote>
                 <table id="test" lay-filter="test"></table>
+
+
 
                 <script type="text/html" id="toolbarDemo">
                 <div class="layui-btn-container">
@@ -94,15 +107,17 @@
     </div>
     <script>
         //JavaScript代码区域
-        layui.use(['table', 'element'], function () {
+        layui.use(['table', 'laypage', 'element', 'jquery'], function () {
             var element = layui.element,
-                table = layui.table;
+                table = layui.table,
+                laypage = layui.laypage;
+            $ = layui.jquery;
 
             //第一个实例
             table.render({
                 elem: '#test'
-                , width: 1120
-                , height: 440
+                , width: 1280
+                , height: 580
                 , toolbar: '#toolbarDemo'
                 , url: '/user' //数据接口
                 , cols: [[ //表头
@@ -116,7 +131,11 @@
                     , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 120 }
                 ]]
                 , page: true
+                , limit: 5
+
             });
+
+
 
             //头工具栏事件
             table.on('toolbar(test)', function (obj) {
@@ -154,6 +173,8 @@
                         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                         let datas = `_id=${data._id}`;
                         xhr.send(datas);
+                        //执行加载数据的方法
+
                     });
                 } else if (obj.event === 'edit') {
                     layer.prompt({
@@ -169,18 +190,53 @@
                         });
                         layer.close(index);
                     });
-
-
-
                 }
             });
 
+
+
+            //查询
+            $(".search_btn").click(function () {
+                let _username = document.getElementById("username").value;
+
+                if ($(".search_input").val() != '') {
+                    var index = layer.msg('查询中，请稍候', { icon: 16, time: false, shade: 0.8 });
+                    setTimeout(function () {
+                        $.ajax({
+                            url: `/search?username=${_username}`,
+                            type: "get",
+                            success: function (data) {
+                                table.render({
+                                    elem: '#test'
+                                    , width: 1280
+                                    , height: 580
+                                    , toolbar: '#toolbarDemo'
+                                    , url: `/search?username=${_username}` //数据接口
+                                    , cols: [[ //表头
+                                        { type: 'checkbox', fixed: 'left' },
+                                        { field: '_id', title: 'ID', width: 200, sort: true, fixed: 'left' }
+                                        , { field: 'username', title: '用户名', width: 100 }
+                                        , { field: 'password', title: '密码', width: 150 }
+                                        , { field: 'email', title: '邮箱', width: 200 }
+                                        , { field: 'gender', title: '性别', width: 100, sort: true }
+                                        , { field: 'beizhu', title: '备注', width: 200 }
+                                        , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 120 }
+                                    ]]
+                                    // , page: true
+                                });
+                            }
+                        })
+                        layer.close(index);
+                    }, 1500);
+                } else {
+                    layer.msg("请输入需要查询的用户");
+                }
+            })
+
+
+
+
         });
-
-
-
-
-
     </script>
 </body>
 

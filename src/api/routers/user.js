@@ -9,21 +9,30 @@ var router = new Router();
 
 router.get('/', async (ctx, next) => {
 
-    let data = await db.find('user', {}); ''
-    // console.log(ctx.query,username,res)
+    let data = await db.find("user", {});
+    let count = data.length;
+    let limit = ctx.query.limit;
+
+    //  (ctx.query.page - 1) * count;
+
     let res = {
         code: 0,
-        data: data
+        data: data,
+        count: count,
+        limit: limit
     }
     ctx.body = res;
 })
+
+
+
 
 
 // 判断用户名是否存在
 router.get('/', async (ctx, next) => {
     let { username } = ctx.query;
 
-    let res = await db.find('user', { username }); console.log(ctx.query, username, res)
+    let res = await db.find('user', { username });
 
     if (res.length > 0) {
         ctx.body = 'no'
