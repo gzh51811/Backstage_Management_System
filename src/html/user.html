@@ -158,13 +158,20 @@
                 } else if (obj.event === 'edit') {
                     layer.prompt({
                         formType: 2
-                        , value: data.email
+                        , value: data.username
+                        // , value: data.email
+                        // , value: data.gender
+                        // , value: data.beizhu
                     }, function (value, index) {
                         obj.update({
-                            email: value
+                            username: "修改"
+                            , password: 'wusiyu'
                         });
                         layer.close(index);
                     });
+
+
+
                 }
             });
 

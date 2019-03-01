@@ -19,7 +19,6 @@ router.get('/', async (ctx, next) => {
 })
 
 
-
 // 判断用户名是否存在
 router.get('/', async (ctx, next) => {
     let { username } = ctx.query;
@@ -32,7 +31,6 @@ router.get('/', async (ctx, next) => {
         ctx.body = 'yes'
     }
 })
-
 
 
 
