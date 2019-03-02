@@ -173,13 +173,13 @@
                 $('#sex').val(res[0].gender);
                 $('#beizhu').val(res[0].beizhu);
             }
-        }
-        xhr.open('post', '/adduser', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        let datas = `_id=${now}`;
-        // console.log(datas);
-        xhr.send(datas);
 
+            xhr.open('post', '/adduser', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            let datas = `_id=${now}`;
+            // console.log(datas);
+            xhr.send(datas);
+        }
 
 
 
