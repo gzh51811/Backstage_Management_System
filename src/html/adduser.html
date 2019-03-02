@@ -82,7 +82,8 @@
                         <label class="layui-form-label">用户名</label>
                         <div class="layui-input-inline">
 
-                            <input type="text" class="form-control" id="username" placeholder="请输入用户名" lay-verify="required">
+                            <input type="text" class="form-control" id="username" placeholder="请输入用户名"
+                                lay-verify="required">
                             <div class="invalid-feedback"></div>
 
                         </div>
@@ -92,8 +93,8 @@
                         <label class="layui-form-label">密码</label>
                         <div class="layui-input-inline">
 
-                            <input type="password" id="password" placeholder="密码必须6到12位" autocomplete="off" class="form-control"
-                                lay-verify="pass">
+                            <input type="password" id="password" placeholder="密码必须6到12位" autocomplete="off"
+                                class="form-control" lay-verify="pass">
                             <div class="invalid-feedback"></div>
 
                         </div>
@@ -103,8 +104,8 @@
                         <label class="layui-form-label">确认密码</label>
                         <div class="layui-input-inline">
 
-                            <input type="password" id="confirmpassword" placeholder="请再次输入密码" autocomplete="off" class="form-control"
-                                lay-verify="pass">
+                            <input type="password" id="confirmpassword" placeholder="请再次输入密码" autocomplete="off"
+                                class="form-control" lay-verify="pass">
                             <div class="invalid-feedback"></div>
 
                         </div>
@@ -137,7 +138,8 @@
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">备注</label>
                         <div class="layui-input-block" id="text">
-                            <textarea placeholder="请输入内容" id="beizhu" class="layui-textarea" lay-verify="required"></textarea>
+                            <textarea placeholder="请输入内容" id="beizhu" class="layui-textarea"
+                                lay-verify="required"></textarea>
                         </div>
                     </div>
                     <div class="layui-form-item">
@@ -180,8 +182,6 @@
         let datas = `_id=${now}`;
         // console.log(datas);
         xhr.send(datas);
-
-
 
 
 
@@ -354,10 +354,7 @@
                 }
                 else {
                     confirmBtn.onclick = function () {
-
                         if (usernameok && passwordok && emailok) {
-
-
                             let _gender = sexval.value;
                             let _beizhu = document.getElementById("beizhu").value;
                             let _username = username.value;
