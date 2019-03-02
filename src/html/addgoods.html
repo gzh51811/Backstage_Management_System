@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../lib/layui/css/layui.css">
     <script src="../lib/jquery-1.10.1.min.js"></script>
     <script src="../lib/layui/layui.js"></script>
-    <script src="../js/common.jss"></script>
+    <script src="../js/common.js"></script>
 </head>
 
 <body class="layui-layout-body">
@@ -67,7 +67,7 @@
 
         <div class="layui-body">
             <!-- 内容主体区域 -->
-            <div style="padding: 20px;">
+            <div style="padding: 20px; border: 10px solid #ccc;">
                 <span class="layui-breadcrumb">
                     <a href="../index.html">首页</a>
                     <a href="javascript:;">商品管理</a>
@@ -78,8 +78,8 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">商品名称</label>
                         <div class="layui-input-block">
-                            <input type="text" name="title" id="goodname" autocomplete="off" placeholder="请输入标题" class="layui-input"
-                                lay-verify="required">
+                            <input type="text" name="title" id="goodname" autocomplete="off" placeholder="请输入标题"
+                                class="layui-input" lay-verify="required">
                         </div>
                     </div>
 
@@ -94,15 +94,15 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">旧商品价格</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="title" id="oldprice" autocomplete="off" placeholder="商品价格" class="layui-input"
-                                lay-verify="required">
+                            <input type="text" name="title" id="oldprice" autocomplete="off" placeholder="商品价格"
+                                class="layui-input" lay-verify="required">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">新商品价格</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="title" id="newprice" autocomplete="off" placeholder="商品价格" class="layui-input"
-                                lay-verify="required">
+                            <input type="text" name="title" id="newprice" autocomplete="off" placeholder="商品价格"
+                                class="layui-input" lay-verify="required">
                         </div>
                     </div>
                     <div class="layui-form-item">
@@ -131,8 +131,8 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">库存</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="title" id="kucun" autocomplete="off" placeholder="库存" class="layui-input"
-                                lay-verify="required">
+                            <input type="text" name="title" id="kucun" autocomplete="off" placeholder="库存"
+                                class="layui-input" lay-verify="required">
                         </div>
                     </div>
 
@@ -157,7 +157,8 @@
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">商品描述</label>
                         <div class="layui-input-block">
-                            <textarea placeholder="请输入内容" class="layui-textarea" name="desc" lay-verify="required" id="miaoshu"></textarea>
+                            <textarea placeholder="请输入内容" class="layui-textarea" name="desc" lay-verify="required"
+                                id="miaoshu"></textarea>
                         </div>
                     </div>
 
@@ -182,30 +183,31 @@
         var data = decodeURI(location.search);//获取从列表页传过来的商品id
         var now = data.slice(1);//切割
         // console.log(data, now);
-        let xhr = new XMLHttpRequest();
-        xhr.onload = () => {
-            if (xhr.status == 200) {
-                let res = JSON.parse(xhr.responseText);
-                // let res = xhr.responseText;
-                console.log(res);
-                // console.log(res[0].type);
-                // var goodname = document.querySelector('#goodname');
-                $('#goodname').val(res[0].goodname);
-                $('#goodtitle').val(res[0].type + '专属品牌商品：' + res[0].goodname);
-                $('#newprice').val(res[0].newprice);
-                $('#oldprice').val(res[0].oldprice);
-                $('#kucun').val(res[0].kucun);
-                $('#htype').val(res[0].type);
-                $('#zhuangtai').val(res[0].zhuangtai);
-                $('#miaoshu').val("品牌：" + res[0].goodname + "，价格：" + res[0].newprice);
+        if (now) {
+            let xhr = new XMLHttpRequest();
+            xhr.onload = () => {
+                if (xhr.status == 200) {
+                    let res = JSON.parse(xhr.responseText);
+                    // let res = xhr.responseText;
+                    // console.log(res);
+                    // console.log(res[0].type);
+                    // var goodname = document.querySelector('#goodname');
+                    $('#goodname').val(res[0].goodname);
+                    $('#goodtitle').val(res[0].type + '专属品牌商品：' + res[0].goodname);
+                    $('#newprice').val(res[0].newprice);
+                    $('#oldprice').val(res[0].oldprice);
+                    $('#kucun').val(res[0].kucun);
+                    $('#htype').val(res[0].type);
+                    $('#zhuangtai').val(res[0].zhuangtai);
+                    $('#miaoshu').val("品牌：" + res[0].goodname + "，价格：" + res[0].newprice);
+                }
             }
+            xhr.open('post', '/addgoods', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            let datas = `_id=${now}`;
+            // console.log(datas);
+            xhr.send(datas);
         }
-        xhr.open('post', '/addgoods', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        let datas = `_id=${now}`;
-        // console.log(datas);
-        xhr.send(datas);
-
 
 
         let htj = document.getElementById("htj");

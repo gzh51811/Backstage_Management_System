@@ -8,7 +8,34 @@
     <link rel="stylesheet" href="lib/layui/css/layui.css">
     <script src="lib/layui/layui.js"></script>
     <script src="js/user-defined.js"></script>
+    <style>
+        .component {
+            float: left;
+            width: 200px;
+            height: 30px;
+            margin-top: 20px;
+            position: relative;
+            color: #000;
+        }
 
+        .layui-icon {
+            position: absolute;
+            right: 8px;
+            top: 10px;
+            color: #000;
+        }
+
+        .component .layui-input {
+            height: 30px;
+            border: none;
+            transition: all 0.3s;
+        }
+
+        .component .layui-form-select .layui-edge,
+        .top_menu .layui-nav-item[mobile] {
+            display: none;
+        }
+    </style>
 </head>
 
 <body class="layui-layout-body">
@@ -18,27 +45,47 @@
             <!-- 头部区域（可配合layui已有的水平导航） -->
             <ul class="layui-nav layui-layout-left">
                 <li class="layui-nav-item"><a href="index.html">首页</a></li>
+
+
+                <div class="layui-form component">
+                    <select name="modules" lay-verify="required" lay-search="">
+                        <option value="">直接选择或搜索选择</option>
+                        <option value="1">layer</option>
+                        <option value="2">form</option>
+                        <option value="3">layim</option>
+                        <option value="4">element</option>
+                        <option value="5">laytpl</option>
+                        <option value="6">upload</option>
+                        <option value="7">laydate</option>
+                        <option value="8">laypage</option>
+                        <option value="9">flow</option>
+                        <option value="10">util</option>
+                    </select>
+                    <div class="layui-unselect layui-form-select">
+                        <div class="layui-select-title"><input type="text" placeholder="直接选择或搜索选择" value=""
+                                class="layui-input layui-unselect"><i></i></div>
+                        <dl class="layui-anim layui-anim-upbit">
+                            <dd lay-value="1" class="">layer</dd>
+                            <dd lay-value="2" class="">form</dd>
+                            <dd lay-value="3" class="">layim</dd>
+                            <dd lay-value="4" class="">element</dd>
+                            <dd lay-value="5" class="">laytpl</dd>
+                            <dd lay-value="6" class="">upload</dd>
+                            <dd lay-value="7" class="">laydate</dd>
+                            <dd lay-value="8" class="">laypage</dd>
+                            <dd lay-value="9" class="">flow</dd>
+                            <dd lay-value="10" class="">util</dd>
+                        </dl>
+                    </div>
+                    <i class="layui-icon"></i>
+                </div>
+
+
                 <!-- 天气 -->
                 <li class="layui-nav-item">
                     <div class="weather" pc>
                         <div id="tp-weather-widget"></div>
-                        <script>(function (T, h, i, n, k, P, a, g, e) { g = function () { P = h.createElement(i); a = h.getElementsByTagName(i)[0]; P.src = k; P.charset = "utf-8"; P.async = 1; a.parentNode.insertBefore(P, a) }; T["ThinkPageWeatherWidgetObject"] = n; T[n] || (T[n] = function () { (T[n].q = T[n].q || []).push(arguments) }); T[n].l = +new Date(); if (T.attachEvent) { T.attachEvent("onload", g) } else { T.addEventListener("load", g, false) } }(window, document, "script", "tpwidget", "//widget.seniverse.com/widget/chameleon.js"))</script>
-                        <script>tpwidget("init", {
-                                "flavor": "slim",
-                                "location": "WX4FBXXFKE4F",
-                                "geolocation": "enabled",
-                                "language": "zh-chs",
-                                "unit": "c",
-                                "theme": "chameleon",
-                                "container": "tp-weather-widget",
-                                "bubble": "disabled",
-                                "alarmType": "badge",
-                                "color": "#FFFFFF",
-                                "uid": "U9EC08A15F",
-                                "hash": "039da28f5581f4bcb5c799fb4cdfb673"
-                            });
-                            tpwidget("show");
-                        </script>
+                        <script src="js/weather.js"></script>
                     </div>
                 </li>
             </ul>

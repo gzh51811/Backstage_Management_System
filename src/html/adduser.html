@@ -11,7 +11,6 @@
     <script src="../lib/layui/layui.js"></script>
     <script src="../lib/jquery-1.10.1.min.js"></script>
     <script src="../js/common.js"></script>
-
 </head>
 
 <body class="layui-layout-body">
@@ -69,13 +68,14 @@
 
         <div class="layui-body">
             <!-- 内容主体区域 -->
-            <div style="padding: 20px ;">
+            <div style="padding: 20px;border: 10px solid #ccc;">
                 <span class="layui-breadcrumb">
                     <a href="../index.html">首页</a>
                     <a href="javascript:;">用户管理</a>
                     <a><cite>用户添加</cite></a>
                 </span>
                 <!-- 添加用户 -->
+
 
                 <form class="layui-form layui-form-pane" action="" style="padding: 50px;" target="nm_iframe">
                     <div class="layui-form-item">
@@ -126,7 +126,7 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">性别</label>
                             <div class="layui-input-inline">
-                                <select name="modules" lay-search="" id="sex">
+                                <select lay-search="" id="sex">
                                     <option value="男">男</option>
                                     <option value="女">女</option>
                                 </select>
@@ -144,7 +144,7 @@
                     </div>
                     <div class="layui-form-item">
                         <!-- <button class="layui-btn" lay-filter="demo2" id="confirmBtn">添加用户</button> -->
-                        <button class="layui-btn" id="confirmBtn">添加用户</button>
+                        <button class="layui-btn" id="confirmBtn">立即提交</button>
                     </div>
                 </form>
                 <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
@@ -161,28 +161,30 @@
     </div>
     <script>
         var data = decodeURI(location.search);//获取从列表页传过来的商品id
+        // console.log(data);
         var now = data.slice(1);//切割
-        let xhr = new XMLHttpRequest();
-        xhr.onload = () => {
-            if (xhr.status == 200) {
-                let res = JSON.parse(xhr.responseText);
-                // let res = xhr.responseText;
-                // console.log(res);
-                // console.log(res[0].username);
-                $('#username').val(res[0].username);
-                $('#password').val(res[0].password);
-                $('#confirmpassword').val(res[0].password);
-                $('#email').val(res[0].email);
-                $('#sex').val(res[0].gender);
-                $('#beizhu').val(res[0].beizhu);
+        if (now) {
+            let xhr = new XMLHttpRequest();
+            xhr.onload = () => {
+                if (xhr.status == 200) {
+                    let res = JSON.parse(xhr.responseText);
+                    // let res = xhr.responseText;
+                    // console.log(res);
+                    // console.log(res[0].username);
+                    $('#username').val(res[0].username);
+                    $('#password').val(res[0].password);
+                    $('#confirmpassword').val(res[0].password);
+                    $('#email').val(res[0].email);
+                    $('#sex').val(res[0].gender);
+                    $('#beizhu').val(res[0].beizhu);
+                }
             }
-
             xhr.open('post', '/adduser', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             let datas = `_id=${now}`;
             // console.log(datas);
             xhr.send(datas);
-        } 
+        }
 
 
         layui.use(['form', 'layedit', 'element'], function () {
@@ -341,6 +343,7 @@
                                     }
                                 }
                             }
+
                             xhr.open('post', '/adduser2', true);
                             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
@@ -374,9 +377,9 @@
                             }
                             xhr.open('post', '/register', true);
                             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
                             let data = `username=${_username}&password=${_password}&email=${_email}&gender=${_gender}&beizhu=${_beizhu}`
-                            xhr.send(data)
+                            xhr.send(data);
+
                         } else {
                             layer.msg("添加失败！");
                         }

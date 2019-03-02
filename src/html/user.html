@@ -122,8 +122,8 @@
                 , url: '/user' //数据接口
                 , cols: [[ //表头
                     { type: 'checkbox', fixed: 'left' },
-                    { field: '_id', title: 'ID', width: 200, sort: true, fixed: 'left' }
-                    , { field: 'username', title: '用户名', width: 80 }
+                    { field: '_id', title: 'ID', width: 180, sort: true, fixed: 'left' }
+                    , { field: 'username', title: '用户名', width: 100 }
                     , { field: 'password', title: '密码', width: 80 }
                     , { field: 'email', title: '邮箱', width: 170 }
                     , { field: 'gender', title: '性别', width: 80, sort: true }
@@ -206,12 +206,13 @@
                                     , url: `/search?username=${_username}` //数据接口
                                     , cols: [[ //表头
                                         { type: 'checkbox', fixed: 'left' },
-                                        { field: '_id', title: 'ID', width: 200, sort: true, fixed: 'left' }
+                                        { field: '_id', title: 'ID', width: 180, sort: true, fixed: 'left' }
                                         , { field: 'username', title: '用户名', width: 100 }
-                                        , { field: 'password', title: '密码', width: 150 }
-                                        , { field: 'email', title: '邮箱', width: 200 }
-                                        , { field: 'gender', title: '性别', width: 100, sort: true }
-                                        , { field: 'beizhu', title: '备注', width: 200 }
+                                        , { field: 'password', title: '密码', width: 80 }
+                                        , { field: 'email', title: '邮箱', width: 170 }
+                                        , { field: 'gender', title: '性别', width: 80, sort: true }
+                                        , { field: 'beizhu', title: '备注', width: 150 }
+                                        , { field: 'regtime', title: '变更时间', width: 180 }
                                         , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 120 }
                                     ]]
                                     // , page: true

@@ -10,7 +10,7 @@ var router = new Router();
 router.post('/', async (ctx, next) => {
     // 解构
     let { _id } = ctx.request.body;
-    // console.log({ _id });
+    // console.log(ctx.request.body);
 
     let res = await db.find('user', { _id: ObjectId(_id) });
     // console.log(res);
