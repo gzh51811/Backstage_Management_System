@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>Backstage Management System</title>
     <link rel="stylesheet" href="../lib/layui/css/layui.css">
+    <script src="../lib/jquery-1.10.1.min.js"></script>
     <script src="../lib/layui/layui.js"></script>
+    <script src="../js/common.jss"></script>
 </head>
 
 <body class="layui-layout-body">
@@ -72,7 +74,7 @@
                     <a><cite>商品添加</cite></a>
                 </span>
 
-                <form class="layui-form layui-form-pane" action="" style="padding: 50px; width: 800px;">
+                <div class="layui-form layui-form-pane" action="" style="padding: 50px; width: 800px;">
                     <div class="layui-form-item">
                         <label class="layui-form-label">商品名称</label>
                         <div class="layui-input-block">
@@ -90,37 +92,40 @@
                     </div>
 
                     <div class="layui-form-item">
-                        <label class="layui-form-label">商品价格</label>
+                        <label class="layui-form-label">旧商品价格</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="title" id="goodprice" autocomplete="off" placeholder="商品价格" class="layui-input"
+                            <input type="text" name="title" id="oldprice" autocomplete="off" placeholder="商品价格" class="layui-input"
                                 lay-verify="required">
                         </div>
                     </div>
-
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">新商品价格</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="title" id="newprice" autocomplete="off" placeholder="商品价格" class="layui-input"
+                                lay-verify="required">
+                        </div>
+                    </div>
                     <div class="layui-form-item">
                         <div class="layui-inline">
                             <label class="layui-form-label">商品分类</label>
                             <div class="layui-input-inline">
-                                <select name="modules" lay-search="" lay-verify="required">
-                                    <option value="">直接选择或搜索选择</option>
-                                    <option value="1">手机</option>
-                                    <option value="2">平板</option>
-                                    <option value="3">电脑</option>
-                                    <option value="4">配件</option>
-                                    <option value="5">办公</option>
-                                    <option value="6">其他</option>
+                                <select name="modules" lay-search="" lay-verify="required" id="htype">
+                                    <!-- <option value="">直接选择或搜索选择</option> -->
+                                    <option value="手机" selected>手机</option>
+                                    <option value="平板">平板</option>
+                                    <option value="电脑">电脑</option>
+                                    <option value="配件">配件</option>
+                                    <option value="办公">办公</option>
+                                    <option value="其他">其他</option>
                                 </select>
                             </div>
                         </div>
                     </div>
 
                     <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">图片上传</label>
-                            <div class="layui-upload-drag" id="test10">
-                                <input type="file">
-                            </div>
-                        </div>
+                        <button type="button" class="layui-btn" id="test1">
+                            <i class="layui-icon">&#xe67c;</i>上传图片
+                        </button>
                     </div>
 
                     <div class="layui-form-item">
@@ -135,33 +140,35 @@
                         <label class="layui-form-label">商品属性</label>
                         <div class="layui-input-block">
                             <input type="checkbox" name="like[remai]" title="热卖">
-                            <input type="checkbox" name="like[cuxiao]" title="促销" checked="">
+                            <input type="checkbox" name="like[cuxiao]" title="促销">
                             <input type="checkbox" name="like[tuijian]" title="推荐">
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">上架</label>
-                        <div class="layui-input-block">
-                            <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest"
-                                lay-text="ON|OFF">
+                        <label class="layui-form-label">状态</label>
+                        <div class="layui-input-inline">
+                            <select name="modules" lay-search="" lay-verify="required" id="zhuangtai">
+                                <option value="上线">上线</option>
+                                <option value="下架">下架</option>
+                            </select>
                         </div>
                     </div>
 
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">商品描述</label>
                         <div class="layui-input-block">
-                            <textarea placeholder="请输入内容" class="layui-textarea" name="desc" lay-verify="required"></textarea>
+                            <textarea placeholder="请输入内容" class="layui-textarea" name="desc" lay-verify="required" id="miaoshu"></textarea>
                         </div>
                     </div>
 
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                            <button class="layui-btn" lay-submit="" lay-filter="demo1" id="htj">立即提交</button>
                             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                         </div>
                     </div>
 
-                </form>
+                </div>
 
             </div>
         </div>
@@ -172,6 +179,125 @@
         </div>
     </div>
     <script>
+        var data = decodeURI(location.search);//获取从列表页传过来的商品id
+        var now = data.slice(1);//切割
+        // console.log(data, now);
+        let xhr = new XMLHttpRequest();
+        xhr.onload = () => {
+            if (xhr.status == 200) {
+                let res = JSON.parse(xhr.responseText);
+                // let res = xhr.responseText;
+                console.log(res);
+                // console.log(res[0].type);
+                // var goodname = document.querySelector('#goodname');
+                $('#goodname').val(res[0].goodname);
+                $('#goodtitle').val(res[0].type + '专属品牌商品：' + res[0].goodname);
+                $('#newprice').val(res[0].newprice);
+                $('#oldprice').val(res[0].oldprice);
+                $('#kucun').val(res[0].kucun);
+                $('#htype').val(res[0].type);
+                $('#zhuangtai').val(res[0].zhuangtai);
+                $('#miaoshu').val("品牌：" + res[0].goodname + "，价格：" + res[0].newprice);
+            }
+        }
+        xhr.open('post', '/addgoods', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        let datas = `_id=${now}`;
+        // console.log(datas);
+        xhr.send(datas);
+
+
+
+        let htj = document.getElementById("htj");
+        let goodname = document.getElementById("goodname");
+        let oldprice = document.getElementById("oldprice");
+        let newprice = document.getElementById("newprice");
+        let kucun = document.getElementById("kucun");
+        let htype = document.getElementById("htype");
+        let zhuangtai = document.getElementById("zhuangtai");
+
+
+        // 编辑修改分支
+        if (now) {
+            htj.onclick = function () {
+                // console.log($('#htype').val());
+                let _goodname = goodname.value;
+                let _newprice = newprice.value;
+                let _oldprice = oldprice.value;
+                let _kucun = kucun.value;
+                let _htype = htype.value;
+                let _zhuangtai = zhuangtai.value;
+                // console.log(_htype);
+                if (_goodname && _newprice && _oldprice && _kucun && _htype && _zhuangtai) {
+                    let xhr = new XMLHttpRequest();
+                    xhr.onload = () => {
+                        if (xhr.status == 200) {
+                            let res = JSON.parse(xhr.responseText);
+                            // console.log(str);
+                            if (res) {
+                                layer.msg("修改成功！");
+                                // window.location.href = './goodlist.html';
+                                setTimeout("window.location.href = './goodlist.html'", 3000);
+                            }
+                        }
+                    }
+                    xhr.open('post', '/addgoods3', true);
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                    let data = `_id=${now}&goodname=${_goodname}&newprice=${_newprice}&oldprice=${_oldprice}&kucun=${_kucun}&type=${_htype}&zhuangtai=${_zhuangtai}`
+                    xhr.send(data)
+                }
+                else {
+                    layer.msg("请填写完整！");
+                }
+            }
+        }
+        //添加商品
+        else {
+            htj.onclick = function () {
+                // console.log($('#htype').val());
+                let _goodname = goodname.value;
+                let _newprice = newprice.value;
+                let _oldprice = oldprice.value;
+                let _kucun = kucun.value;
+                let _htype = htype.value;
+                let _zhuangtai = zhuangtai.value;
+                // console.log(_htype);
+                if (_goodname && _newprice && _oldprice && _kucun && _htype && _zhuangtai) {
+                    let xhr = new XMLHttpRequest();
+                    xhr.onload = () => {
+                        if (xhr.status == 200) {
+                            let res = JSON.parse(xhr.responseText);
+                            if (res) {
+                                layer.msg("添加成功！");
+                                // window.location.href = './goodlist.html';
+                                //延时跳转页面
+                                setTimeout("window.location.href = './goodlist.html'", 3000);
+                            }
+                        }
+                    }
+                    xhr.open('post', '/addgoods2', true);
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                    let data = `goodname=${_goodname}&newprice=${_newprice}&oldprice=${_oldprice}&kucun=${_kucun}&type=${_htype}&zhuangtai=${_zhuangtai}`
+                    xhr.send(data)
+                }
+                else {
+                    layer.msg("请填写完整！");
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
         //JavaScript代码区域
         layui.use(['element', 'form', 'upload'], function () {
             var element = layui.element
@@ -183,13 +309,10 @@
 
             //拖拽上传
             upload.render({
-                elem: '#test10'
-                , url: '../images'
-                , done: function (res) {
-                    console.log(res)
-                }
+                elem: '#test1',
             });
         });
+
     </script>
 </body>
 

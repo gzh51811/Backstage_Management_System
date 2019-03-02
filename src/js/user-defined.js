@@ -17,7 +17,7 @@ layui.config({
                 '<div class="admin-header-lock-img"><img src="images/xxx.jpg" class="layui-nav-img"></div>' +
                 '<div class="admin-header-lock-name" id="lockUserName" style="margin-top:10px">Administartor</div>' +
                 '<div class="input_btn">' +
-                '<input type="password" class="admin-header-lock-input layui-input" autocomplete="off" placeholder="请输入密码解锁.." name="lockPwd" id="lockPwd" />'
+                '<input type="password" class="admin-header-lock-input layui-input" autocomplete="off" placeholder="请输入密码解锁.." name="lockPwd" id="lockPwd" style="width:200px;margin:10px auto;"/>'
                 // '<input type="password" name="lockPwd" id="lockPwd" placeholder="请输入密码解锁.." autocomplete="off" class= "form-control" style="width:200px"/>'
                 +
                 '<button class="layui-btn" id="unlock" style="margin-top:10px">解锁</button>' +
@@ -58,9 +58,5 @@ layui.config({
             $("#unlock").click();
         }
     });
-
-
-
-
 
 });

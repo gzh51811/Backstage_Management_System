@@ -13,7 +13,11 @@ const userRouter = require('./user');
 const registerRouter = require('./register');
 const goodtype = require('./goodtype');
 const search = require('./search');
-
+const addgoods = require('./addgoods');
+const addgoods2 = require('./addgoods2');
+const addgoods3 = require('./addgoods3');
+const adduser = require('./adduser');
+const adduser2 = require('./adduser2');
 router.use(koaBody({
     // 支持formdata
     multipart: true,
@@ -43,4 +47,9 @@ router.use('/search', search.routes())
 
 
 
+router.use('/addgoods', addgoods.routes())
+router.use('/addgoods2', addgoods2.routes())
+router.use('/addgoods3', addgoods3.routes())
+router.use('/adduser', adduser.routes())
+router.use('/adduser2', adduser2.routes())
 module.exports = router;
