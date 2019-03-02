@@ -8,9 +8,11 @@
     <title>添加用户</title>
     <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../lib/layui/css/layui.css">
+    <link rel="stylesheet" href="../css/search.css">
     <script src="../lib/layui/layui.js"></script>
     <script src="../lib/jquery-1.10.1.min.js"></script>
     <script src="../js/common.js"></script>
+    <script src="../js/user-defined.js"></script>
 </head>
 
 <body class="layui-layout-body">
@@ -19,7 +21,46 @@
             <div class="layui-logo" style="background: url(../images/hlogo.jpg) no-repeat center"></div>
             <!-- 头部区域（可配合layui已有的水平导航） -->
             <ul class="layui-nav layui-layout-left">
-                <li class="layui-nav-item"><a href="../index.html">首页</a></li>
+                <li class="layui-nav-item"><a href="index.html">首页</a></li>
+                <div class="layui-form component">
+                    <select name="modules" lay-verify="required" lay-search="">
+                        <option value="">直接选择或搜索选择</option>
+                        <option value="1">layer</option>
+                        <option value="2">form</option>
+                        <option value="3">layim</option>
+                        <option value="4">element</option>
+                        <option value="5">laytpl</option>
+                        <option value="6">upload</option>
+                        <option value="7">laydate</option>
+                        <option value="8">laypage</option>
+                        <option value="9">flow</option>
+                        <option value="10">util</option>
+                    </select>
+                    <div class="layui-unselect layui-form-select">
+                        <div class="layui-select-title"><input type="text" placeholder="直接选择或搜索选择" value=""
+                                class="layui-input layui-unselect"><i></i></div>
+                        <dl class="layui-anim layui-anim-upbit">
+                            <dd lay-value="1" class="">layer</dd>
+                            <dd lay-value="2" class="">form</dd>
+                            <dd lay-value="3" class="">layim</dd>
+                            <dd lay-value="4" class="">element</dd>
+                            <dd lay-value="5" class="">laytpl</dd>
+                            <dd lay-value="6" class="">upload</dd>
+                            <dd lay-value="7" class="">laydate</dd>
+                            <dd lay-value="8" class="">laypage</dd>
+                            <dd lay-value="9" class="">flow</dd>
+                            <dd lay-value="10" class="">util</dd>
+                        </dl>
+                    </div>
+                    <i class="layui-icon"></i>
+                </div>
+                <!-- 天气 -->
+                <li class="layui-nav-item">
+                    <div class="weather" pc>
+                        <div id="tp-weather-widget"></div>
+                        <script src="../js/weather.js"></script>
+                    </div>
+                </li>
             </ul>
             <ul class="layui-nav layui-layout-right">
                 <li class="layui-nav-item">
@@ -31,6 +72,9 @@
                         <dd><a href="">基本资料</a></dd>
                         <dd><a href="">安全设置</a></dd>
                     </dl>
+                </li>
+                <li class="layui-nav-item lockcms" pc>
+                    <a href="javascript:;"><i class="iconfont icon-lock1"></i><cite>锁屏</cite></a>
                 </li>
                 <li class="layui-nav-item"><a href="">退出</a></li>
             </ul>
@@ -70,13 +114,11 @@
             <!-- 内容主体区域 -->
             <div style="padding: 20px;border: 10px solid #ccc;">
                 <span class="layui-breadcrumb">
-                    <a href="../index.html">首页</a>
+                    <a href="index.html">首页</a>
                     <a href="javascript:;">用户管理</a>
                     <a><cite>用户添加</cite></a>
                 </span>
                 <!-- 添加用户 -->
-
-
                 <form class="layui-form layui-form-pane" action="" style="padding: 50px;" target="nm_iframe">
                     <div class="layui-form-item">
                         <label class="layui-form-label">用户名</label>
@@ -85,7 +127,6 @@
                             <input type="text" class="form-control" id="username" placeholder="请输入用户名"
                                 lay-verify="required">
                             <div class="invalid-feedback"></div>
-
                         </div>
                     </div>
 
@@ -99,7 +140,6 @@
 
                         </div>
                     </div>
-
                     <div class="layui-form-item">
                         <label class="layui-form-label">确认密码</label>
                         <div class="layui-input-inline">
@@ -107,7 +147,6 @@
                             <input type="password" id="confirmpassword" placeholder="请再次输入密码" autocomplete="off"
                                 class="form-control" lay-verify="pass">
                             <div class="invalid-feedback"></div>
-
                         </div>
                     </div>
                     <div class="layui-form-item">
@@ -117,8 +156,6 @@
                             <input type="email" id="email" placeholder="请输入邮箱地址" autocomplete="off" class="form-control"
                                 lay-verify="required">
                             <div class="invalid-feedback"></div>
-
-
                         </div>
                     </div>
 
@@ -133,8 +170,6 @@
                             </div>
                         </div>
                     </div>
-
-
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">备注</label>
                         <div class="layui-input-block" id="text">
@@ -148,12 +183,9 @@
                     </div>
                 </form>
                 <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
-
                 <!-- end -->
-
             </div>
         </div>
-
         <div class="layui-footer" style="text-align:center">
             <!-- 底部固定区域 -->
             © 2019.2.27 Backstage Management System
@@ -186,18 +218,14 @@
             xhr.send(datas);
         }
 
-
         layui.use(['form', 'layedit', 'element'], function () {
             var element = layui.element;
 
             var form = layui.form
                 , layer = layui.layer
                 , layedit = layui.layedit;
-
-
             //创建一个编辑器
             var editIndex = layedit.build('LAY_demo_editor');
-
             //自定义验证规则
             form.verify({
                 title: function (value) {
@@ -214,7 +242,6 @@
                 }
             });
 
-
             //监听提交
             form.on('submit(demo1)', function (data) {
                 layer.alert(JSON.stringify(data.field), {
@@ -222,8 +249,6 @@
                 })
                 return false;
             });
-
-
 
             (() => {
                 //判断用户名是否存在
@@ -259,7 +284,6 @@
                     xhr.open('get', `/register?username=${_username}`, true);
                     xhr.send();
                 }
-
                 //密码
                 let passwordok = false;
                 let password = document.querySelector("#password");
@@ -277,7 +301,6 @@
                         passwordok = false;
                     }
                 }
-
                 //确认密码
                 let confirmpasswordok = false;
                 let confirmpassword = document.querySelector("#confirmpassword");
@@ -296,7 +319,6 @@
                         confirmpasswordok = false;
                     }
                 }
-
                 //邮箱
                 let emailok = false;
                 let email = document.querySelector("#email");
@@ -314,10 +336,8 @@
                         emailok = false;
                     }
                 }
-
                 let sexval = document.getElementById("sex");
                 let confirmBtn = document.getElementById("confirmBtn");
-
                 let _gender = sexval.value;
                 //点击 
                 //判断是修改还是新注册，now是证明有id是修改
@@ -343,7 +363,6 @@
                                     }
                                 }
                             }
-
                             xhr.open('post', '/adduser2', true);
                             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
@@ -353,7 +372,6 @@
                             layer.msg("修改失败！");
                         }
                     }
-
                 }
                 else {
                     confirmBtn.onclick = function () {
@@ -387,10 +405,7 @@
                 }
 
             })();
-
         });
-
-
     </script>
     <style>
         a {

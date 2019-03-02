@@ -14,7 +14,7 @@ layui.config({
             title: false,
             type: 1,
             content: '	<div class="admin-header-lock" id="lock-box" style="text-align:center; width:350px;height:200px;margin-top:30px;border-radius:10px">' +
-                '<div class="admin-header-lock-img"><img src="images/xxx.jpg" class="layui-nav-img"></div>' +
+                '<div class="admin-header-lock-img"><img src="../images/xxx.jpg" class="layui-nav-img"></div>' +
                 '<div class="admin-header-lock-name" id="lockUserName" style="margin-top:10px">Administartor</div>' +
                 '<div class="input_btn">' +
                 '<input type="password" class="admin-header-lock-input layui-input" autocomplete="off" placeholder="请输入密码解锁.." name="lockPwd" id="lockPwd" style="width:250px;margin:10px auto;"/>'

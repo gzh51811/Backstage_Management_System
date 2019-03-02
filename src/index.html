@@ -1,166 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Backstage Management System</title>
-    <link rel="stylesheet" href="lib/layui/css/layui.css">
+    <meta charset="UTF-8" />
+    <title>后台管理系统</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/login.css" />
+    <link rel="stylesheet" type="text/css" href="css/component.css" />
     <script src="lib/layui/layui.js"></script>
-    <script src="js/user-defined.js"></script>
-    <style>
-        .component {
-            float: left;
-            width: 200px;
-            height: 30px;
-            margin-top: 20px;
-            position: relative;
-            color: #000;
-        }
-
-        .layui-icon {
-            position: absolute;
-            right: 8px;
-            top: 10px;
-            color: #000;
-        }
-
-        .component .layui-input {
-            height: 30px;
-            border: none;
-            transition: all 0.3s;
-        }
-
-        .component .layui-form-select .layui-edge,
-        .top_menu .layui-nav-item[mobile] {
-            display: none;
-        }
-    </style>
+    <script src="lib/jquery-1.10.1.min.js"></script>
+    <script src="js/common.js"></script>
+    <!--[if IE]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
 </head>
 
-<body class="layui-layout-body">
-    <div class="layui-layout layui-layout-admin">
-        <div class="layui-header">
-            <div class="layui-logo" style="background: url(images/hlogo.jpg) no-repeat center"></div>
-            <!-- 头部区域（可配合layui已有的水平导航） -->
-            <ul class="layui-nav layui-layout-left">
-                <li class="layui-nav-item"><a href="index.html">首页</a></li>
-
-
-                <div class="layui-form component">
-                    <select name="modules" lay-verify="required" lay-search="">
-                        <option value="">直接选择或搜索选择</option>
-                        <option value="1">layer</option>
-                        <option value="2">form</option>
-                        <option value="3">layim</option>
-                        <option value="4">element</option>
-                        <option value="5">laytpl</option>
-                        <option value="6">upload</option>
-                        <option value="7">laydate</option>
-                        <option value="8">laypage</option>
-                        <option value="9">flow</option>
-                        <option value="10">util</option>
-                    </select>
-                    <div class="layui-unselect layui-form-select">
-                        <div class="layui-select-title"><input type="text" placeholder="直接选择或搜索选择" value=""
-                                class="layui-input layui-unselect"><i></i></div>
-                        <dl class="layui-anim layui-anim-upbit">
-                            <dd lay-value="1" class="">layer</dd>
-                            <dd lay-value="2" class="">form</dd>
-                            <dd lay-value="3" class="">layim</dd>
-                            <dd lay-value="4" class="">element</dd>
-                            <dd lay-value="5" class="">laytpl</dd>
-                            <dd lay-value="6" class="">upload</dd>
-                            <dd lay-value="7" class="">laydate</dd>
-                            <dd lay-value="8" class="">laypage</dd>
-                            <dd lay-value="9" class="">flow</dd>
-                            <dd lay-value="10" class="">util</dd>
-                        </dl>
-                    </div>
-                    <i class="layui-icon"></i>
+<body>
+    <div class="container demo-1">
+        <div class="content">
+            <div id="large-header" class="large-header">
+                <canvas id="demo-canvas"></canvas>
+                <div class="logo_box">
+                    <h3>欢迎你</h3>
+                    <form action="#" name="#" method="post">
+                        <div class="input_outer">
+                            <span class="u_user"></span>
+                            <input id="username" class="text" style="color: #FFFFFF !important;" type="text"
+                                autocomplete="off" placeholder="请输入用户">
+                        </div>
+                        <div class="input_outer">
+                            <span class="us_uer"></span>
+                            <input id="password" class="text"
+                                style="color: #FFFFFF !important; position:absolute; z-index:100;" value=""
+                                type="password" placeholder="请输入密码">
+                        </div>
+                        <div class="mb2" @click="login"><a class="act-but submit btnLogin" id="hlbtn"
+                                style="color: #FFFFFF">登录</a></div>
+                    </form>
                 </div>
-
-
-                <!-- 天气 -->
-                <li class="layui-nav-item">
-                    <div class="weather" pc>
-                        <div id="tp-weather-widget"></div>
-                        <script src="js/weather.js"></script>
-                    </div>
-                </li>
-            </ul>
-
-            <ul class="layui-nav layui-layout-right">
-                <li class="layui-nav-item">
-                    <a href="javascript:;">
-                        <img src="images/xxx.jpg" class="layui-nav-img">
-                        Administartor
-                    </a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="">基本资料</a></dd>
-                        <dd><a href="">安全设置</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item lockcms" pc>
-                    <a href="javascript:;"><i class="iconfont icon-lock1"></i><cite>锁屏</cite></a>
-                </li>
-                <li class="layui-nav-item"><a href="">退出</a></li>
-            </ul>
-        </div>
-
-        <div class="layui-side layui-bg-black">
-            <div class="layui-side-scroll">
-                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-                <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                    <li class="layui-nav-item layui-nav-itemed">
-                        <a class="" href="javascript:;">商品管理</a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="html/goodlist.html">商品列表</a></dd>
-                            <dd><a href="html/goodtype.html">商品分类</a></dd>
-                            <dd><a href="html/addgoods.html">添加商品</a></dd>
-                        </dl>
-                    </li>
-                    <li class="layui-nav-item layui-nav-itemed">
-                        <a href="javascript:;">用户管理</a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="html/user.html">用户列表</a></dd>
-                            <dd><a href="html/adduser.html">用户添加</a></dd>
-                        </dl>
-                    </li>
-                    <li class="layui-nav-item layui-nav-itemed">
-                        <a href="javascript:;">订单管理</a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="html/orderlist.html">订单列表</a></dd>
-
-                        </dl>
-                    </li>
-
-                </ul>
             </div>
-        </div>
-
-        <div class="layui-body">
-            <!-- 内容主体区域 -->
-            <div style="width: 100%;height: 100%;background:url(images/sybj.jpg)no-repeat center">
-                <h1 style="position:absolute;top: 150px;left: 400px;color: #58bc58;font-size: 40px;font-weight: bold;">
-                    Welcome
-                    to:<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;后台管理系统
-                </h1>
-            </div>
-        </div>
-
-        <div class="layui-footer" style="text-align:center">
-            <!-- 底部固定区域 -->
-            © 2019.2.27 Backstage Management System
         </div>
     </div>
+    <script src="js/TweenLite.min.js"></script>
+    <script src="js/EasePack.min.js"></script>
+    <script src="js/login.js"></script>
     <script>
-        //JavaScript代码区域
-        layui.use('element', function () {
-            var element = layui.element;
+        (() => {
+            layui.define(['layer', 'jquery'], function (exports) {
+                var layer = layui.layer;
+                var $ = layui.jquery;
+                let username = document.querySelector('#username');
+                let password = document.querySelector('#password');
+                let btnLogin = document.querySelector('.btnLogin');
 
-        });
+                btnLogin.onclick = (e) => {
+                    let _username = username.value.trim();
+                    let _password = password.value.trim();
+                    if (_username && _password) {
+                        let xhr = new XMLHttpRequest();
+                        xhr.onload = () => {
+                            if (xhr.status == 200) {
+                                let res = JSON.parse(xhr.responseText);
+                                // console.log(res);
+                                if (res) {
+                                    layer.msg('登录成功！');
+                                    setTimeout(() => {
+                                        location.href = 'html/index.html';
+                                    }, 1500);
+                                }
+                                else {
+                                    layer.msg('用户名或密码错误!');
+                                }
+                            }
+                        }
+                        xhr.open('post', '/login', true);
+                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                        let data = `username=${_username}&password=${_password}`
+                        xhr.send(data);
+                        e.preventDefault();
+                    }
+                    else {
+                        layer.msg('用户名或密码不能为空!');
+                    }
+                }
+            });
+        })();
     </script>
 </body>
 
