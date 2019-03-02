@@ -5,19 +5,6 @@ const db = require('../db');
 var ObjectId = require('mongodb').ObjectId;
 // 创建路由
 var router = new Router();
-
-// router.post('/', async (ctx, next) => {
-//     // 解构
-//     let { goodname, newprice, oldprice, kucun, type, zhuangtai } = ctx.request.body;
-
-//     let data = { goodname, newprice, oldprice, kucun, type, zhuangtai, shijian: new Date() }
-//     let res = await db.find('goodlist', { data });
-//     console.log(res);
-//     ctx.body = res
-
-//     // 存入数据库
-
-// })
 router.post('/', async (ctx, next) => {
     // 解构
     let { _id, goodname, newprice, oldprice, kucun, type, zhuangtai } = ctx.request.body;

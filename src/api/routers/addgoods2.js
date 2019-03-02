@@ -11,7 +11,7 @@ router.post('/', async (ctx, next) => {
 
     let data = { goodname, newprice, oldprice, kucun, type, zhuangtai, shijian: new Date() }
     let res = await db.insert('goodlist', data);
-    console.log(res);
+    // console.log(res);
     ctx.body = res
 
     // 存入数据库

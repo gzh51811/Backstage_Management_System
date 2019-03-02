@@ -9,7 +9,7 @@ router.post('/', async (ctx, next) => {
     // 解构
     let { _id, username, password, email, gender, beizhu } = ctx.request.body;
     // console.log(_id, goodname, newprice, oldprice, kucun, type);
-    let data = { _id: ObjectId(_id), username, password, email, gender, beizhu };
+    let data = { _id: ObjectId(_id), username, password, email, gender, beizhu, regtime: new Date() };
     // console.log(data);
     // ctx.body = res;
     // 存入数据库

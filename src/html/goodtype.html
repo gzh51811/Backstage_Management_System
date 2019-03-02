@@ -96,11 +96,12 @@
                 , url: '/goodtype' //数据接口
                 , page: true //开启分页
                 , cols: [[ //表头
-                    { type: 'checkbox', fixed: 'left' },
+                    // { type: 'checkbox', fixed: 'left' },
                     { field: '_id', title: 'ID', width: 220, sort: true, fixed: 'left' }
                     , { field: 'type', title: '商品分类', width: 580 }
                     , { field: 'time', title: '类型编号', width: 150 }
-                    , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 120 }
+                    , { field: 'hot', title: '热度', width: 100 }
+                    , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 70 }
                 ]]
             });
             table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
