@@ -10,11 +10,15 @@ var router = new Router();
 
 router.get('/', async (ctx, next) => {
 
-    let data = await db.find('goodtype', {});
+    let { page, limit } = ctx.request.query;
+    let data = await db.find("goodtype", {}, page, limit * 1);
+    let data2 = await db.find('goodtype', {});
+    let count = data2.length;
     // console.log(ctx.query,username,res)
     let res = {
         code: 0,
-        data: data
+        data: data,
+        count: count
     }
     ctx.body = res;
 })

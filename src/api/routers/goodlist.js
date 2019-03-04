@@ -9,11 +9,16 @@ var router = new Router();
 
 router.get('/', async (ctx, next) => {
 
-    let data = await db.find('goodlist', {});
+    let { page, limit } = ctx.request.query;
+
+    let data = await db.find("goodlist", {}, page, limit * 1);
+    let data2 = await db.find('goodlist', {});
     // console.log(ctx.query,username,res)
+    let count = data2.length;
     let res = {
         code: 0,
-        data: data
+        data: data,
+        count: count,
     }
     ctx.body = res;
 })
