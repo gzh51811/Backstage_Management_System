@@ -16,9 +16,11 @@
         <div class="layui-header">
             <div class="layui-logo" style="background: url(../images/hlogo.jpg) no-repeat center"></div>
             <!-- 头部区域（可配合layui已有的水平导航） -->
-            <ul class="layui-nav layui-layout-left">
-                <li class="layui-nav-item"><a href="index.html">首页</a></li>
-                <div class="layui-form component">
+            <ul class="layui-nav layui-layout-left" style="height:60px;">
+                <li class="layui-nav-item" style="padding-bottom: 20px;height:60px;line-height: 65px;"><a href="index.html">首页</a></li>
+
+
+                <div class="layui-form component" style="margin-top:15px;">
                     <select name="modules" lay-verify="required" lay-search="">
                         <option value="">直接选择或搜索选择</option>
                         <option value="1">layer</option>
@@ -33,8 +35,7 @@
                         <option value="10">util</option>
                     </select>
                     <div class="layui-unselect layui-form-select">
-                        <div class="layui-select-title"><input type="text" placeholder="直接选择或搜索选择" value=""
-                                class="layui-input layui-unselect"><i></i></div>
+                        <div class="layui-select-title"><input type="text" placeholder="直接选择或搜索选择" value="" class="layui-input layui-unselect"><i></i></div>
                         <dl class="layui-anim layui-anim-upbit">
                             <dd lay-value="1" class="">layer</dd>
                             <dd lay-value="2" class="">form</dd>
@@ -51,9 +52,11 @@
                     <i class="layui-icon"></i>
                 </div>
 
+
                 <!-- 天气 -->
-                <li class="layui-nav-item">
-                    <div class="weather" pc>
+                <li class="layui-nav-item" style="height:60px;padding-bottom: 20px;line-height: 55px;">
+                    <div class="
+                    weather" pc>
                         <div id="tp-weather-widget"></div>
                         <script src="../js/weather.js"></script>
                     </div>
