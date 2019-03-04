@@ -8,25 +8,20 @@ var ObjectId = require('mongodb').ObjectId;
 var router = new Router();
 
 router.get('/', async (ctx, next) => {
-
-    let data = await db.find("user", {});
-    let count = data.length;
-    let limit = ctx.query.limit;
-
-    //  (ctx.query.page - 1) * count;
+    // console.log(ctx.request.query);
+    let { page, limit } = ctx.request.query;
+    // var limit = ctx.query.limit;
+    let data = await db.find("user", {}, page, limit * 1);
+    let data2 = await db.find("user", {});
+    let count = data2.length;
 
     let res = {
         code: 0,
         data: data,
         count: count,
-        limit: limit
     }
     ctx.body = res;
 })
-
-
-
-
 
 // 判断用户名是否存在
 router.get('/', async (ctx, next) => {
@@ -40,8 +35,6 @@ router.get('/', async (ctx, next) => {
         ctx.body = 'yes'
     }
 })
-
-
 
 router.post('/', async (ctx, next) => {
     // 解构

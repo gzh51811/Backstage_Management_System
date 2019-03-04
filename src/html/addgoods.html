@@ -10,6 +10,12 @@
     <script src="../lib/layui/layui.js"></script>
     <script src="../js/common.js"></script>
     <script src="../js/user-defined.js"></script>
+
+    <style>
+        html {
+            user-select: none;
+        }
+    </style>
 </head>
 
 <body class="layui-layout-body">
@@ -65,17 +71,13 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;">
                         <img src="../images/xxx.jpg" class="layui-nav-img">
-                        Administartor
+                        <span class="welcome"></span>
                     </a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="">基本资料</a></dd>
-                        <dd><a href="">安全设置</a></dd>
-                    </dl>
                 </li>
                 <li class="layui-nav-item lockcms" pc>
                     <a href="javascript:;"><i class="iconfont icon-lock1"></i><cite>锁屏</cite></a>
                 </li>
-                <li class="layui-nav-item"><a href="">退出</a></li>
+                <li class="layui-nav-item loginout"><a href="javascript:;">退出</a></li>
             </ul>
         </div>
 
@@ -336,6 +338,8 @@
             });
         });
     </script>
+
 </body>
+<script src="../js/token.js"></script>
 
 </html>

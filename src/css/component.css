@@ -1,4 +1,7 @@
 /* Header */
+html{
+	user-select: none;
+}
 .large-header {
 	position: relative;
 	width: 100%;

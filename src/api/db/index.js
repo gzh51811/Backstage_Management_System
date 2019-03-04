@@ -58,21 +58,21 @@ exports.update = async (colName, query, newData) => {
     return res;
 }
 
-exports.find = async (colName, query) => {
+exports.find = async (colName, query, page, limit) => {
     let { db, client } = await connect();
     let collection = db.collection(colName);
-    let res = await collection.find(query).toArray();
-    client.close();
-    // 返回查询结果
-    return res;
+    if (page && limit) {
+        let res = await collection.find(query).skip((page - 1) * limit).limit(limit).toArray();
+        client.close();
+        // 返回查询结果
+        return res;
+    } else {
+        let res = await collection.find(query).toArray();
+        client.close();
+        // 返回查询结果
+        return res;
+    }
+
+
 }
 
-
-
-
-
-
-
-
-// insert('user',[{name:'xxx',age:20},{name:'xx2',age:18}]);
-// delete('user',{age:{$lt:18}});

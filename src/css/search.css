@@ -1,4 +1,5 @@
 .component {
+    user-select: none;
     float: left;
     width: 200px;
     height: 30px;
@@ -7,7 +8,7 @@
     color: #000;
 }
 
-.layui-icon {
+.component .layui-icon {
     position: absolute;
     right: 8px;
     top: 10px;

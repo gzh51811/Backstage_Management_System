@@ -63,17 +63,13 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;">
                         <img src="../images/xxx.jpg" class="layui-nav-img">
-                        Administartor
+                        <span class="welcome"></span>
                     </a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="">基本资料</a></dd>
-                        <dd><a href="">安全设置</a></dd>
-                    </dl>
                 </li>
                 <li class="layui-nav-item lockcms" pc>
                     <a href="javascript:;"><i class="iconfont icon-lock1"></i><cite>锁屏</cite></a>
                 </li>
-                <li class="layui-nav-item"><a href="">退出</a></li>
+                <li class="layui-nav-item loginout"><a href="javascript:;">退出</a></li>
             </ul>
         </div>
 
@@ -127,6 +123,11 @@
             © 2019.2.27 Backstage Management System
         </div>
     </div>
+    <style>
+        html {
+            user-select: none;
+        }
+    </style>
     <script>
         //JavaScript代码区域
         layui.use(['element', 'table'], function () {
@@ -180,6 +181,8 @@
             });
         });
     </script>
+
 </body>
+<script src="../js/token.js"></script>
 
 </html>

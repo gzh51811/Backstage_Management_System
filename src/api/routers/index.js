@@ -18,6 +18,8 @@ const addgoods2 = require('./addgoods2');
 const addgoods3 = require('./addgoods3');
 const adduser = require('./adduser');
 const adduser2 = require('./adduser2');
+const tokenverifyRouter = require('./tokenverify');
+
 router.use(koaBody({
     // 支持formdata
     multipart: true,
@@ -52,4 +54,6 @@ router.use('/addgoods2', addgoods2.routes())
 router.use('/addgoods3', addgoods3.routes())
 router.use('/adduser', adduser.routes())
 router.use('/adduser2', adduser2.routes())
+router.use('/tokenverify', tokenverifyRouter.routes())
+
 module.exports = router;

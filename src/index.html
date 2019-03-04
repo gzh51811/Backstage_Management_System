@@ -67,6 +67,7 @@
                                     layer.msg('登录成功！');
                                     setTimeout(() => {
                                         location.href = 'html/index.html';
+                                        localStorage.setItem('user', xhr.responseText);
                                     }, 1500);
                                 }
                                 else {
@@ -83,6 +84,12 @@
                     else {
                         layer.msg('用户名或密码不能为空!');
                     }
+                }
+            });
+            //键盘回车登录
+            $(document).on('keydown', function () {
+                if (event.keyCode == 13) {
+                    $(".btnLogin").click();
                 }
             });
         })();

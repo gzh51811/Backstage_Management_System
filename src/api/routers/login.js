@@ -2,6 +2,7 @@ const Router = require('koa-router');
 
 const db = require('./../db');
 
+const token = require("../utils/token")
 // 创建路由
 var router = new Router();
 
@@ -19,7 +20,13 @@ router.post('/', async (ctx, next) => {
     res = res[0];
     // console.log(res);
     if (res) {
-        ctx.body = 1;
+        //登录成功。发送token
+        let _token = token.create(username)
+        ctx.body = {
+            username: res.username,
+            token: _token
+        }
+
     } else {
         ctx.body = 0;
     }

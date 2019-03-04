@@ -62,17 +62,17 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;">
                         <img src="../images/xxx.jpg" class="layui-nav-img">
-                        Administartor
+                        <span class="welcome"></span>
                     </a>
-                    <dl class="layui-nav-child">
+                    <!-- <dl class="layui-nav-child">
                         <dd><a href="">基本资料</a></dd>
                         <dd><a href="">安全设置</a></dd>
-                    </dl>
+                    </dl> -->
                 </li>
                 <li class="layui-nav-item lockcms" pc>
                     <a href="javascript:;"><i class="iconfont icon-lock1"></i><cite>锁屏</cite></a>
                 </li>
-                <li class="layui-nav-item"><a href="">退出</a></li>
+                <li class="layui-nav-item loginout"><a href="javascript:;">退出</a></li>
             </ul>
         </div>
 
@@ -144,19 +144,24 @@
             © 2019.2.27 Backstage Management System
         </div>
     </div>
+    <style>
+        html {
+            user-select: none;
+        }
+    </style>
     <script>
         //JavaScript代码区域
         layui.use(['table', 'laypage', 'element', 'jquery'], function () {
             var element = layui.element,
                 table = layui.table,
-                laypage = layui.laypage;
-            $ = layui.jquery;
+                laypage = layui.laypage,
+                $ = layui.jquery;
 
             //第一个实例
             table.render({
                 elem: '#test'
                 , width: 1280
-                , height: 580
+                , height: 520
                 , toolbar: '#toolbarDemo'
                 , url: '/user' //数据接口
                 , cols: [[ //表头
@@ -171,7 +176,6 @@
                     , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 120 }
                 ]]
                 , page: true
-                , limit: 5
 
             });
 
@@ -235,7 +239,7 @@
                                 table.render({
                                     elem: '#test'
                                     , width: 1280
-                                    , height: 580
+                                    , height: 520
                                     , toolbar: '#toolbarDemo'
                                     , url: `/search?username=${_username}` //数据接口
                                     , cols: [[ //表头
@@ -249,7 +253,8 @@
                                         , { field: 'regtime', title: '变更时间', width: 180 }
                                         , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 120 }
                                     ]]
-                                    // , page: true
+                                    , page: true
+                                    // , limit: limit
                                 });
                             }
                         })
@@ -262,6 +267,7 @@
         });
 
     </script>
+    <script src="../js/token.js"></script>
 </body>
 
 </html>
