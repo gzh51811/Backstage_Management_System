@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>后台管理系统</title>
+    <link rel="icon" href="images/icon.jpg">
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" type="text/css" href="css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="css/login.css" />
@@ -11,6 +12,7 @@
     <script src="lib/layui/layui.js"></script>
     <script src="lib/jquery-1.10.1.min.js"></script>
     <script src="js/common.js"></script>
+    <script src="js/md5.js"></script>
     <!--[if IE]>
     <script src="../js/html5.js"></script>
     <![endif]-->
@@ -57,6 +59,7 @@
                 btnLogin.onclick = (e) => {
                     let _username = username.value.trim();
                     let _password = password.value.trim();
+                    var md5password = $.md5(_password);
                     if (_username && _password) {
                         let xhr = new XMLHttpRequest();
                         xhr.onload = () => {
@@ -77,7 +80,7 @@
                         }
                         xhr.open('post', '/login', true);
                         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                        let data = `username=${_username}&password=${_password}`
+                        let data = `username=${_username}&password=${md5password}`
                         xhr.send(data);
                         e.preventDefault();
                     }

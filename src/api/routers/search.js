@@ -6,7 +6,7 @@ var router = new Router();
 // 判断用户名是否存在
 router.get('/', async (ctx, next) => {
     let { username } = ctx.query;
-    console.log(ctx.query);
+
     let data = await db.find('user', { username });
 
     let res = {
