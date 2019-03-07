@@ -13,6 +13,11 @@
     http://47.107.93.209:1811 
     http://www.govan.store:1811
 
+### 测试账号
+
+| 用户名 | 密码   |
+| ------ | ------ |
+| laoxie | 123456 |
 
 ### github地址
     https://github.com/gzh51811/Backstage_Management_System.git
